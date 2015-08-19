@@ -1,0 +1,56 @@
+/*------------------------------------*\
+	[SETTINGS]
+\*------------------------------------*/
+
+@import 'settings/colors';
+@import 'settings/fonts';
+@import 'settings/gallery';
+@import 'settings/icons';
+
+
+/*------------------------------------*\
+	[BASE]
+\*------------------------------------*/
+
+@import 'base/normalize';
+@import 'base/foundation';
+@import 'base/page';
+@import 'base/gallery';
+
+/*------------------------------------*\
+	[TOOLS]
+\*------------------------------------*/
+
+@import 'tools/truncate';
+@import 'tools/mixins';
+
+/*------------------------------------*\
+	[GENERIC]
+\*------------------------------------*/
+
+@import 'generic/icons';
+@import 'generic/sprite-all-sprite';
+
+/*------------------------------------*\
+	[OBJECTS]
+\*------------------------------------*/
+
+@import 'objects/pagination';
+@import 'objects/buttons';
+@import 'objects/dropdown';
+@import 'objects/filters';
+@import 'objects/mapbox';
+@import 'objects/gallery';
+
+/*------------------------------------*\
+	[COMPONENTS]
+\*------------------------------------*/
+
+@import 'components/nav';
+@import 'components/widgets';
+
+/*------------------------------------*\
+	[SECTIONS]
+\*------------------------------------*/
+
+@import 'sections/dashboard';

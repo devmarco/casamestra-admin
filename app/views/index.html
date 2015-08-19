@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="cm" ng-strict-di>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<base href="/">
+	<title>Document</title>
+
+	<link rel='icon' type='image/png' href='/public/assets/img/favicon.png'>
+
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Josefin+Slab:300,400,600,700,300italic&family=Open+Sans:400,600,700,300'>
+	<link rel='stylesheet' href='/public/assets/css/compiled/app.css'>
+
+	<script type='text/javascript' src='/public/assets/js/app.js'></script>
+</head>
+<body>
+	<div class="wrapper">
+		<nav ng-controller="Nav">
+			<div class="nav">
+				<div class="nav__logo">
+					<img src="/public/assets/imgs/logo/casamestra-footer.svg" alt="">
+				</div>
+				<ul>
+					<li>
+						<a href="/" class="dashboard-icon" ng-class="{active: active === '/'}">Dashboard</a>
+					</li>
+					<li>
+						<a href="estates" class="estates-icon" ng-class="{active: active === '/estates'}">Imóveis</a>
+					</li>
+					<li>
+						<a href="estates" class="neighborhoods-icon" ng-class="{active: active === '/estates'}">Vizinhança</a>
+					</li>
+					<li>
+						<a href="estates" class="agents-icon" ng-class="{active: active === '/estates'}">Corretores</a>
+					</li>
+					<li>
+						<a href="estates" class="users-icon" ng-class="{active: active === '/estates'}">Usuários</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<main>
+			<div ng-view></div>
+		</main>
+	</div>
+</body>
+</html>

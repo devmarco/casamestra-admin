@@ -1,0 +1,25 @@
+.dashboard {
+
+	header {
+		margin-bottom: 27px;
+
+		.title {
+			color: #fff;
+			margin: 0;
+
+			@extend %f-light;
+			@extend %f30;
+
+			&:before {
+				display: inline-block;
+				margin-right: 10px;
+
+				@extend .pe-7s-repeat;
+			}
+		}
+	}
+}
+
+.content__bx {
+	@extend .clearfix;
+}

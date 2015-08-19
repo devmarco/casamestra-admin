@@ -1,0 +1,129 @@
+.widget {
+	width: 50%;
+	display: block;
+	float: left;
+	padding: 0 5px;
+	margin-top: 20px;
+
+	.content {
+		height: 250px;
+		overflow-y: auto;
+	}
+}
+
+.content__widget {
+	background: rgba(0, 0, 0, 0.20);
+}
+
+.widget__header {
+	border-bottom: 2px solid rgba(0, 0, 0, 0.20);
+	@extend .clearfix;
+	h2 {
+		color: #fff;
+		margin: 14px 0 0 0;
+		float: left;
+		@extend %f-regular;
+		@extend %f10;
+	}
+
+	.widget-icon {
+		display: block;
+		float: left;
+		&:before {
+			color: #fff;
+			display: inline-block;
+			padding: 15px 20px 15px 20px;
+			font-size: 20px;
+			border-right: 2px solid rgba(0, 0, 0, 0.20);
+			margin-right: 25px;
+
+			@extend .pe-7s-home;
+		}
+	}
+}
+
+.widget--panel {
+	width: 25%;
+	margin: 0;
+
+	span {
+		display: block;
+		text-align: center;
+	}
+	.header {
+		border-top: 2px solid rgba(0, 0, 0, 0.20);
+		@extend .clearfix;
+		span {
+			float: left;
+			display: block;
+		}
+
+		.icon {
+			color: #fff;
+			padding: 10px 20px;
+			text-align: center;
+			border-right: 2px solid rgba(0, 0, 0, 0.20);
+		}
+
+		.title {
+			color: #fff;
+			margin: 12px 0 0 10px;
+			@extend %f-light;
+			@extend %f8;
+		}
+	}
+	.total {
+		color: #fff;
+		@extend %f-bold;
+		@extend %f30;
+	}
+}
+
+.icon--users {
+	&:before {
+		display: inline-block;
+		@extend .pe-7s-users;
+	}
+}
+
+.estates--list {
+	list-style: none;
+	margin: 0;
+	padding: 1em;
+
+	li {
+		@extend .clearfix;
+
+	}
+	.image {
+		float: left;
+		width: 20%;
+
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+
+	.info {
+		float: left;
+		width: 80%;
+		padding-left: 10px;
+
+		span {
+			display: block;
+		}
+	}
+
+	.address {
+		color: #fff;
+		@extend %f-regular;
+		@extend %f8;
+	}
+
+	.title {
+		color: #fff;
+		@extend %f-regular;
+		@extend %f9;
+	}
+}
