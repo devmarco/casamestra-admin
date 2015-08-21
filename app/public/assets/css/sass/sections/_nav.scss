@@ -1,0 +1,28 @@
+nav {
+	position: fixed;
+	left: 0;
+	width: 300px;
+}
+
+.nav {
+	list-style: none;
+	margin: 20px 0 0 0;
+	padding: 0;
+
+	li {
+
+	}
+
+	a {
+		color: $master;
+		text-decoration: none;
+		padding: 10px 1em;
+
+		@extend %f-regular;
+		@extend %f10;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

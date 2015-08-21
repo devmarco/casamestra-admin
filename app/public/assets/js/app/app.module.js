@@ -3,9 +3,8 @@
 
 	angular.module('cm', [
 		'cm.core',
-		'cm.estates',
 		'cm.dashboard',
-		'cm.nav',
+		'cm.estates',
 		'cm.widgets',
 	]);
 

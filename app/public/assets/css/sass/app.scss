@@ -30,23 +30,20 @@
 
 @import 'generic/icons';
 @import 'generic/sprite-all-sprite';
+@import 'generic/forms';
 
 /*------------------------------------*\
 	[OBJECTS]
 \*------------------------------------*/
 
-@import 'objects/pagination';
 @import 'objects/buttons';
 @import 'objects/dropdown';
-@import 'objects/filters';
-@import 'objects/mapbox';
 @import 'objects/gallery';
 
 /*------------------------------------*\
 	[COMPONENTS]
 \*------------------------------------*/
 
-@import 'components/nav';
 @import 'components/widgets';
 
 /*------------------------------------*\
@@ -54,3 +51,5 @@
 \*------------------------------------*/
 
 @import 'sections/dashboard';
+@import 'sections/nav';
+@import 'sections/estates';

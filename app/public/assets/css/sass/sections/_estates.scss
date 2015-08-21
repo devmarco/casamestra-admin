@@ -1,0 +1,8 @@
+.estates {
+	padding-left: 330px;
+
+	> .content {
+		padding: 1em;
+		@extend .row;
+	}
+}

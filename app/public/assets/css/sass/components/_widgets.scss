@@ -1,129 +1,97 @@
 .widget {
-	width: 50%;
-	display: block;
-	float: left;
-	padding: 0 5px;
-	margin-top: 20px;
+	background: #EFEFF0;
+	width: 200px;
+	height: 200px;
+	padding: 1em;
+	display: inline-block;
 
-	.content {
-		height: 250px;
-		overflow-y: auto;
-	}
-}
+	.title {
+		margin: 0;
+		color: #989898;
 
-.content__widget {
-	background: rgba(0, 0, 0, 0.20);
-}
-
-.widget__header {
-	border-bottom: 2px solid rgba(0, 0, 0, 0.20);
-	@extend .clearfix;
-	h2 {
-		color: #fff;
-		margin: 14px 0 0 0;
-		float: left;
-		@extend %f-regular;
+		@extend %f-bold;
 		@extend %f10;
 	}
 
-	.widget-icon {
-		display: block;
-		float: left;
-		&:before {
-			color: #fff;
-			display: inline-block;
-			padding: 15px 20px 15px 20px;
-			font-size: 20px;
-			border-right: 2px solid rgba(0, 0, 0, 0.20);
-			margin-right: 25px;
-
-			@extend .pe-7s-home;
-		}
+	.content {
+		margin: 10px 0 0 0;
 	}
 }
 
-.widget--panel {
-	width: 25%;
-	margin: 0;
+.widget--total {
+	.content {
+		margin-top: 40px;
+	}
 
-	span {
+	.number,
+	.label {
 		display: block;
-		text-align: center;
+		text-align: right;
 	}
-	.header {
-		border-top: 2px solid rgba(0, 0, 0, 0.20);
-		@extend .clearfix;
-		span {
-			float: left;
-			display: block;
-		}
 
-		.icon {
-			color: #fff;
-			padding: 10px 20px;
-			text-align: center;
-			border-right: 2px solid rgba(0, 0, 0, 0.20);
-		}
+	.number {
+		color: #303030;
+		line-height: 40px;
 
-		.title {
-			color: #fff;
-			margin: 12px 0 0 10px;
-			@extend %f-light;
-			@extend %f8;
-		}
-	}
-	.total {
-		color: #fff;
 		@extend %f-bold;
-		@extend %f30;
+		@extend %f33;
+	}
+
+	.label {
+		color: #989898;
+		line-height: 30px;
+
+		@extend %f-bold;
+		@extend %f15;
 	}
 }
 
-.icon--users {
-	&:before {
-		display: inline-block;
-		@extend .pe-7s-users;
+.widget--compare {
+	canvas {
+		width: 100%;
+		height: 110px;
 	}
-}
 
-.estates--list {
-	list-style: none;
-	margin: 0;
-	padding: 1em;
+	.legend {
+		list-style: none;
+		margin: 0;
+		padding: 0;
 
-	li {
 		@extend .clearfix;
 
-	}
-	.image {
-		float: left;
-		width: 20%;
+		li {
+			float: left;
+			color: #989898;
 
-		img {
-			max-width: 100%;
-			height: auto;
+			@extend .clearfix;
+			@extend %f-regular;
+			@extend %f8;
+
+			&:before {
+				content: '';
+				float: left;
+				margin-right: 5px;
+				width: 10px;
+				height: 10px;
+				margin-top: 5px;
+			}
+
+			&:first-child {
+				margin-right: 10px;
+			}
 		}
+
+		.one:before { background-color: $green; }
+		.two:before { background-color: $master; }
 	}
+}
 
-	.info {
-		float: left;
-		width: 80%;
-		padding-left: 10px;
+.widget--best {
+	.name {
+		display: block;
+		line-height: 45px;
 
-		span {
-			display: block;
-		}
-	}
-
-	.address {
-		color: #fff;
-		@extend %f-regular;
-		@extend %f8;
-	}
-
-	.title {
-		color: #fff;
-		@extend %f-regular;
-		@extend %f9;
+		@extend %f-bold;
+		@extend %f25;
 	}
 }
