@@ -1,8 +1,6 @@
 (function module() {
 	'use strict';
 
-	angular.module('cm.estates', [
-		'ui.select',
-	]);
+	angular.module('cm.estates', []);
 
 }());

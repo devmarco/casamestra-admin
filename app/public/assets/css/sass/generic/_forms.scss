@@ -1,32 +1,48 @@
-form {
+.form-content {
 	@extend .row;
 
+	.form-group-title {
+		display: block;
+		margin-bottom: 25px;
+
+		@extend %f-regular;
+		@extend %f12;
+	}
+
 	.form-group {
+		position: relative;
 		margin-bottom: 20px;
-		background: #F5F5F5;
+		background: #fff;
 		border: 1px solid #EFEEEE;
-		padding: 1em;
+		padding: 0.8em;
 		@include vendor(transition, background-color 0.5s ease-out);
 
 		label {
-			color: #B7B7B7;
+			color: $master;
 			display: block;
 			text-transform: uppercase;
 			@extend %f-bold;
 			@extend %f7;
 		}
 
-		input {
+		input,
+		textarea {
 			border: none;
 			background-color: transparent;
 			display: block;
 			width: 100%;
 			color: $master;
+			margin-top: 5px;
+			height: auto;
+			min-height: auto;
 
 			&:focus,
 			&:active {
 				outline: 0;
 			}
+
+			@extend %f-regular;
+			@extend %f9;
 		}
 
 		&:hover {

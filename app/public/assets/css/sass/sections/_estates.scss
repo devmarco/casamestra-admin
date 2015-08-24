@@ -6,3 +6,130 @@
 		@extend .row;
 	}
 }
+
+.estates--form {
+	.address__map {
+		margin: 10px 0;
+
+		#address-map {
+			width: 100%;
+			height: 200px;
+		}
+	}
+
+	.address__search {
+		@extend .clearfix;
+
+		input {
+			display: block;
+			width: 85%;
+			float: left;
+		}
+
+		button {
+			display: block;
+			width: 15%;
+			float: left;
+		}
+	}
+	.address__location input {
+		width: 49%;
+		display: inline-block;
+		pointer-events: none;
+		color: #A5A5A5;
+	}
+}
+
+.gallery-form {
+	position: relative;
+
+	.gallery__button {
+		position: relative;
+		cursor: pointer;
+		&:before {
+			content: '\e66f';
+			display: block;
+			width: 100px;
+			height: 100px;
+			font-size: 100px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -50px 0 0 -60px;
+			@extend %font-config;
+		}
+		input {
+			position: relative;
+			z-index: 1;
+			width: 100%;
+			height: 269px;
+			display: block;
+			cursor: pointer;
+			@include opacity(0);
+		}
+
+		.loader {
+			span {
+				display: block;
+				height: 2px;
+				background: #000;
+				width: 0px;
+				@include vendor(transition, width 0.2s ease-out);
+			}
+		}
+	}
+
+	.gallery__button.active {
+		@include opacity(3);
+		&:before {
+			content: '\e6c2';
+			margin: -30px 0 0 -30px;
+			width: 42px;
+			height: 50px;
+			font-size: 50px;
+			@include vendor(animation, loading 1s infinite linear);
+		}
+	}
+
+	@-webkit-keyframes loading {
+		from { -webkit-transform: rotate(0deg); }
+		to { -webkit-transform: rotate(360deg); }
+	}
+	@-moz-keyframes loading {
+		from { -moz-transform: rotate(0deg); }
+		to { -moz-transform: rotate(360deg); }
+	}
+	@-o-keyframes loading {
+		from { -o-transform: rotate(0deg); }
+		to { -o-transform: rotate(360deg); }
+	}
+
+	.gallery__thumbs {
+		display: none;
+		margin-top: 5px;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			@extend .clearfix;
+		}
+
+		li {
+			float: left;
+			padding: 5px 3px;
+			width: 33%;
+
+			span {
+				display: block;
+				width: 100%;
+				height: 80px;
+				background-size: cover;
+				border: 1px solid #EFEFEF;
+			}
+		}
+	}
+}
