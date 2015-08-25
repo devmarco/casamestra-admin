@@ -5289,36 +5289,56 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function count() {
 	'use strict';
 
-	function cmUpload($window) {
+	function cmUpload($window, $http) {
 
 		function link($scope, element, attrs) {
 			var buttonBx = $(element).find('.gallery__button'),
 				loadingBx = buttonBx.find('.loader > span'),
 				galleryBx = $('.gallery__thumbs'),
-				galleryList = galleryBx.find('ul');
+				galleryList = galleryBx.find('ul'),
+				fileData;
 
-				$scope.upload = function upload(images) {
-					var fRead,
-						thumb,
-						i = 0;
+			$scope.upload = function upload(images) {
+				var fRead,
+					thumb,
+					i = 0;
 
-					function create(file) {
-						return function create(e) {
-							thumb = '<li><span style="background-image: url(' + e.target.result + ')"></span></li>';
-							galleryList.append(thumb);
-						};
-					}
+				fileData = new FormData();
 
-					for (i in images) {
-						if (images[i]) {
-							fRead = new FileReader();
-							if (/(\.|\/)(gif|jpe?g|png)$/i.test(images[i].type)) {
-								fRead.onload = create(images[i]);
-								fRead.readAsDataURL(images[i]);
-							}
+				fileData.append('cover', 1);
+
+				function create(file) {
+					return function create(e) {
+						thumb = '<li><span style="background-image: url(' + e.target.result + ')"></span></li>';
+						galleryList.append(thumb);
+					};
+				}
+
+				for (i in images) {
+					if (images[i]) {
+						fRead = new FileReader();
+						if (/(\.|\/)(gif|jpe?g|png)$/i.test(images[i].type)) {
+							fileData.append('file', images[i]);
+							fRead.onload = create(images[i]);
+							fRead.readAsDataURL(images[i]);
 						}
 					}
-				};
+				}
+
+				$http.patch('http://0.0.0.0:8081/estates/0007cede-e243-4a18-a629-6ad913c5a372/upload', fileData, {
+					withCredentials: false,
+					headers: {
+						'Content-Type': undefined,
+					},
+					transformRequest: angular.identity,
+				})
+				.success(function success(data) {
+					console.log('Success', data);
+				})
+				.error(function erros(data) {
+					console.log('Error', data);
+				});
+			};
 
 			// function activeLoading() {
 			// 	buttonBx.addClass('active');
@@ -5370,7 +5390,7 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 		};
 	}
 
-	cmUpload.$inject = ['$window'];
+	cmUpload.$inject = ['$window', '$http'];
 
 	angular
 		.module('cm.widgets')
