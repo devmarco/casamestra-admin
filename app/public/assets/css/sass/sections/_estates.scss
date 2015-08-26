@@ -1,8 +1,8 @@
 .estates {
-	padding-left: 330px;
+	padding-left: 90px;
 
 	> .content {
-		padding: 1em;
+		padding: 1em 3em 1em 0;
 		@extend .row;
 	}
 }
@@ -115,6 +115,7 @@
 		position: absolute;
 		top: 0;
 		width: 100%;
+		z-index: 1;
 		ul {
 			list-style: none;
 			margin: 0;
@@ -129,11 +130,32 @@
 			width: 33%;
 
 			span {
+				position: relative;
 				display: block;
 				width: 100%;
 				height: 80px;
 				background-size: cover;
 				border: 1px solid #EFEFEF;
+			}
+		}
+
+		li.active {
+			span {
+				border: 3px solid #2A3038;
+			}
+			span:before {
+				content: 'Capa';
+				display: block;
+				position: absolute;
+				bottom: 0;
+				background: rgb(42, 48, 56);
+				width: 100%;
+				text-align: center;
+				color: #fff;
+				font-size: 0.2em;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				padding: 0.2em;
 			}
 		}
 	}

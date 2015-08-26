@@ -5070,6 +5070,30 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function count() {
 	'use strict';
 
+	function cmBreadcrumb($window) {
+
+		function link() {
+
+		}
+
+		return {
+			templateUrl: '/public/assets/js/app/components/breadcrumb.html',
+			restrict: 'EA',
+			scope: true,
+			link: link,
+		};
+	}
+
+	cmBreadcrumb.$inject = ['$window'];
+
+	angular
+		.module('cm.widgets')
+		.directive('cmBreadcrumb', cmBreadcrumb);
+
+}());
+;(function count() {
+	'use strict';
+
 	function cmNav($window) {
 
 		function link() {
@@ -5340,6 +5364,14 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 					$scope.select = true;
 					$scope.thumbnails = thumbs;
 				}, 1000);
+
+
+				// Select cover photos
+				$scope.setCover = function set(e) {
+					var thumb = $('.js-thumb');
+					thumb.removeClass('active');
+					$(e.target).parent().addClass('active');
+				};
 			});
 
 			// $http.patch('http://0.0.0.0:8081/estates/0007cede-e243-4a18-a629-6ad913c5a372/upload', fileData, {

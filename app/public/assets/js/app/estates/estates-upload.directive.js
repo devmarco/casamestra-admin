@@ -52,6 +52,14 @@
 					$scope.select = true;
 					$scope.thumbnails = thumbs;
 				}, 1000);
+
+
+				// Select cover photos
+				$scope.setCover = function set(e) {
+					var thumb = $('.js-thumb');
+					thumb.removeClass('active');
+					$(e.target).parent().addClass('active');
+				};
 			});
 
 			// $http.patch('http://0.0.0.0:8081/estates/0007cede-e243-4a18-a629-6ad913c5a372/upload', fileData, {

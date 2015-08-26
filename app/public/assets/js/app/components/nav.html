@@ -1,10 +1,42 @@
-<nav>
-	<ul class='nav'>
+<nav class="nav--collapsed">
+	<div class="nav__logo">
+		<img src="/public/assets/imgs/logo/casamestra-footer.svg" alt="">
+	</div>
+	<ul class='nav__list'>
 		<li>
-			<a href="/">Dashboard</a>
+			<a href="/">
+				<span class="title">Dashboard</span>
+				<span class="icon icon--dashboard"></span>
+			</a>
 		</li>
 		<li>
-			<a href="/estates">Imóveis</a>
+			<a href="/estates">
+				<span class="title">Imóveis</span>
+				<span class="icon icon--estates"></span>
+			</a>
+			<ul>
+				<li>
+					<a href="/estates">Cadastrar</a>
+				</li>
+				<li>
+					<a href="/estates">Editar</a>
+				</li>
+				<li>
+					<a href="/estates">Visualizar</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="/estates">
+				<span class="title">Corretores</span>
+				<span class="icon icon--agents"></span>
+			</a>
+		</li>
+		<li>
+			<a href="/estates">
+				<span class="title">Vizinhanças</span>
+				<span class="icon icon--neighborhoods"></span>
+			</a>
 		</li>
 	</ul>
 </nav>

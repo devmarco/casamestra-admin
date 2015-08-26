@@ -2,7 +2,20 @@
 	[COLORS]
 \*------------------------------------*/
 
-$master: #2A3038;
-$green:  #00CAD2;
-$dark: 	 #282828;
-$grey: 	 #A09F9F;
+$master:        #2A3038;
+$master-dark1:  darken( $master, 45% );
+$master-dark2:  darken( $master, 27% );
+$master-dark3:  darken( $master, 0% );
+$master-light1: lighten( $master, 16% );
+$master-light2: lighten( $master, 9.5% );
+$master-light3: lighten( $master, 3% );
+
+$green:  		#00CAD2;
+$green-dark1:   darken( $green, 45% );
+$green-dark2:   darken( $green, 27% );
+$green-dark3:   darken( $green, 0% );
+$green-light1:  lighten( $green, 16% );
+$green-light2:  lighten( $green, 9.5% );
+$green-light3:  lighten( $green, 3% );
+
+$primary: #232021;

@@ -1,0 +1,32 @@
+.breadcrumb {
+	list-style: none;
+	margin: 0;
+	padding: 1em 17.2px;
+
+	@extend .clearfix;
+
+	li {
+		float: left;
+		margin-right: 10px;
+	}
+
+	a {
+		text-decoration: none;
+		color: #7b7d82;
+		text-transform: uppercase;
+
+		@extend %f-regular;
+		@extend %f7;
+
+		&:focus,
+		&:hover,
+		&:active {
+			outline: 0;
+		}
+	}
+
+	.active {
+		@extend %f-bold;
+		color: $master;
+	}
+}
