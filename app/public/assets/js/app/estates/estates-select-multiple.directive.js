@@ -16,15 +16,15 @@
 					{email: 'someone@gmail.com'},
 				],
 				render: {
-					item: function item(item, escape) {
+					item: function render(option, escape) {
 						return '<div>' +
-							(item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
-							(item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+							(option.name ? '<span class="name">' + escape(option.name) + '</span>' : '') +
+							(option.email ? '<span class="email">' + escape(option.email) + '</span>' : '') +
 						'</div>';
 					},
-					option: function option(item, escape) {
-						var label = item.name || item.email;
-						var caption = item.name ? item.email : null;
+					option: function select(option, escape) {
+						var label = option.name || option.email;
+						var caption = option.name ? option.email : null;
 						return '<div>' +
 							'<span class="label">' + escape(label) + '</span>' +
 							(caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +

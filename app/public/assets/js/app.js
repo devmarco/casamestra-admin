@@ -5229,15 +5229,15 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 					{email: 'someone@gmail.com'},
 				],
 				render: {
-					item: function item(item, escape) {
+					item: function render(option, escape) {
 						return '<div>' +
-							(item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
-							(item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+							(option.name ? '<span class="name">' + escape(option.name) + '</span>' : '') +
+							(option.email ? '<span class="email">' + escape(option.email) + '</span>' : '') +
 						'</div>';
 					},
-					option: function option(item, escape) {
-						var label = item.name || item.email;
-						var caption = item.name ? item.email : null;
+					option: function select(option, escape) {
+						var label = option.name || option.email;
+						var caption = option.name ? option.email : null;
 						return '<div>' +
 							'<span class="label">' + escape(label) + '</span>' +
 							(caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
@@ -5289,97 +5289,71 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function count() {
 	'use strict';
 
-	function cmUpload($window, $http) {
+	function cmUpload($window, $http, $timeout) {
 
 		function link($scope, element, attrs) {
-			var buttonBx = $(element).find('.gallery__button'),
+			var inputFile = angular.element(document.querySelector('#photos')),
+				buttonBx = $(element).find('.gallery__button'),
 				loadingBx = buttonBx.find('.loader > span'),
 				galleryBx = $('.gallery__thumbs'),
 				galleryList = galleryBx.find('ul'),
-				fileData;
+				fileData,
+				thumbs = [];
 
-			$scope.upload = function upload(images) {
-				var fRead,
-					thumb,
+			// Hide thumbnails
+			$scope.inUpload = false;
+			$scope.loading = false;
+
+			inputFile.bind('change', function change() {
+				var fileReader,
+					images = inputFile[0].files,
 					i = 0;
+
+				$scope.loading = true;
 
 				fileData = new FormData();
 
-				fileData.append('cover', 1);
-
 				function create(file) {
 					return function create(e) {
-						thumb = '<li><span style="background-image: url(' + e.target.result + ')"></span></li>';
-						galleryList.append(thumb);
+						thumbs.push({
+							url: e.target.result,
+						});
 					};
 				}
 
-				for (i in images) {
+				for (i; i < images.length; i++) {
 					if (images[i]) {
-						fRead = new FileReader();
+						fileReader = new FileReader();
 						if (/(\.|\/)(gif|jpe?g|png)$/i.test(images[i].type)) {
+							fileReader.onload = create(images[i]);
+							fileReader.readAsDataURL(images[i]);
 							fileData.append('file', images[i]);
-							fRead.onload = create(images[i]);
-							fRead.readAsDataURL(images[i]);
 						}
 					}
 				}
 
-				$http.patch('http://0.0.0.0:8081/estates/0007cede-e243-4a18-a629-6ad913c5a372/upload', fileData, {
-					withCredentials: false,
-					headers: {
-						'Content-Type': undefined,
-					},
-					transformRequest: angular.identity,
-				})
-				.success(function success(data) {
-					console.log('Success', data);
-				})
-				.error(function erros(data) {
-					console.log('Error', data);
-				});
-			};
+				$scope.$apply();
 
-			// function activeLoading() {
-			// 	buttonBx.addClass('active');
-			// 	galleryBx.show();
-			// }
-			//
-			// function showGallery() {
-			// 	buttonBx.hide();
-			// }
-			//
-			// $(element[0]).transloadit({
-			// 	wait: true,
-			// 	modal: false,
-			// 	fields: true,
-			// 	autoSubmit: false,
-			// 	triggerUploadOnFileSelection: true,
-			// 	params: {
-			// 		auth: { key: '39575f7020f211e59ce6414129454e12'},
-			// 		template_id: 'bac9b260241211e5ab88e55411778119',
+				$timeout(function() {
+					$scope.inUpload = true;
+					$scope.loading = false;
+					$scope.select = true;
+					$scope.thumbnails = thumbs;
+				}, 1000);
+			});
+
+			// $http.patch('http://0.0.0.0:8081/estates/0007cede-e243-4a18-a629-6ad913c5a372/upload', fileData, {
+			// 	withCredentials: false,
+			// 	headers: {
+			// 		'Content-Type': undefined,
 			// 	},
-			// 	onStart: function() {
-			// 		activeLoading();
-			// 	},
-			// 	onProgress: function progress(bytesReceived, bytesExpected) {
-			// 		loadingBx.css('width', ((bytesReceived / bytesExpected * 100).toFixed(2) + '%'));
-			// 	},
-			// 	onResult: function result(step, result) {
-			// 		var thumb;
-			//
-			// 		if (step !== 'thumb') return false;
-			//
-			// 		thumb = '<li><span style="background-image: url(' + result.url + ')"></span></li>';
-			//
-			// 		galleryList.append(thumb);
-			// 	},
-			// 	onSuccess: function(result) {
-			// 		showGallery();
-			// 	},
-			// 	onError: function error(assembly) {
-			// 		alert(assembly.error + ': ' + Assembly.message);
-			// 	},
+			// 	transformRequest: angular.identity,
+			// })
+			// .success(function success(data) {
+			// 	console.log('Success', data);
+			// })
+			// .error(function erros(data) {
+			// 	console.log('Error', data);
 			// });
 		}
 
@@ -5390,7 +5364,7 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 		};
 	}
 
-	cmUpload.$inject = ['$window', '$http'];
+	cmUpload.$inject = ['$window', '$http', '$timeout'];
 
 	angular
 		.module('cm.widgets')

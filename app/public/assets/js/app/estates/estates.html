@@ -186,13 +186,19 @@
 						<div class="form-group">
 							<label for="">Imagens</label>
 							<form method="POST" action="" cm-upload class="gallery-form">
-								<div class="gallery__button">
-									<input name="photos" id="photos" type="file" multiple ng-model="photos" onchange="angular.element(this).scope().upload(this.files)">
+								<div class="gallery__button" ng-class="{active: loading && !select, inSelect: select}">
+									<input name="photos" id="photos" type="file" multiple>
 									<div class="loader">
 										<span></span>
 									</div>
 								</div>
-								<div class="gallery__thumbs"><ul></ul></div>
+								<div class="gallery__thumbs" ng-if="inUpload">
+									<ul>
+										<li ng-repeat="img in thumbnails">
+											<span style="background-image: url({{ img.url }})"></span>
+										</li>
+									</ul>
+								</div>
 							</form>
 						</div>
 					</div>
