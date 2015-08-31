@@ -9,7 +9,7 @@
 
 	<link rel='icon' type='image/png' href='/public/assets/img/favicon.png'>
 
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Josefin+Slab:300,400,600,700,300italic&family=Open+Sans:400,600,700,300'>
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300'>
 	<link rel='stylesheet' href='/public/assets/css/compiled/app.css'>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtqDRHHavgN6gzR_EG25ZK3qhL0qaXVWQ"></script>
@@ -18,8 +18,33 @@
 </head>
 <body>
 	<div class="wrapper">
+		<header>
+			<div class="row">
+				<nav class="nav">
+					<ul>
+						<li>
+							<a href="">Dashboard</a>
+						</li>
+						<li>
+							<a href="">Estates</a>
+						</li>
+						<li>
+							<a href="">Neighborhoods</a>
+						</li>
+						<li>
+							<a href="">Agents</a>
+						</li>
+						<li>
+							<a href="">Users</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
 		<main>
-			<div ng-view></div>
+			<div class="content">
+				<div ng-view></div>
+			</div>
 		</main>
 	</div>
 </body>

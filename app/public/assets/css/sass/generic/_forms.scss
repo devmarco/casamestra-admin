@@ -1,22 +1,48 @@
 .form-area {
 	@extend .clearfix;
-	.form-presentation {
-		padding-bottom: 1em;
-		border-bottom: 1px solid #ccc;
-		margin-bottom: 3em;
-		h2 {
+	.form-header {
+		margin-bottom: 40px;
+
+		h1 {
 			color: $master;
 			margin: 0;
 			letter-spacing: -1px;
-			line-height: 56px;
-			@extend %f-bold;
-			@extend %f36;
+			line-height: 40px;
+			margin-bottom: 10px;
+			@extend %f-regular;
+			@extend %f16;
 		}
 
-		h3 {
-			color: #828181;
-			@extend %f-regular;
-			@extend %f12;
+		h2 {
+			margin: 0;
+			color: #B3B3B3;
+			@extend %f-light;
+			@extend %f8;
+		}
+	}
+
+	.form-action {
+		text-align: right;
+		margin-top: 20px;
+
+		button, a {
+			display: inline-block;
+
+			&:first-child {
+				margin-right: 10px;
+			}
+		}
+
+		.back-btn {
+			background: #B9B9B9;
+		}
+
+		.next-btn {
+			background: $master;
+		}
+
+		.finish {
+			background: $green;
 		}
 	}
 
@@ -24,6 +50,7 @@
 		display: block;
 		margin-bottom: 25px;
 		letter-spacing: -1px;
+		color: $master-light1;
 
 		@extend %f-regular;
 		@extend %f10;
@@ -32,15 +59,16 @@
 	.form-group {
 		position: relative;
 		margin-bottom: 18px;
-		background: #fff;
-		border: 1px solid #EFEEEE;
+		background: #fcfcfd;
+		border-bottom: 1px solid #dfe0e3;
 		padding: 7px 12px 4px;
 		@include vendor(transition, background-color 0.5s ease-out);
 
 		label {
-			color: $master;
+			color: $master-light2;
 			display: block;
 			text-transform: uppercase;
+			margin-bottom: 10px;
 			@extend %f-bold;
 			@extend %f7;
 		}
@@ -67,7 +95,97 @@
 
 		&:hover {
 			background-color: #E5E8E9;
-			border: 1px solid #D6D6D6;
+			border-bottom: 1px solid #D6D6D6;
 		}
+	}
+
+	.address__search {
+		@extend .clearfix;
+
+		input, button {
+			display: block;
+			float: left;
+		}
+		input {
+			width: 90%;
+			padding: 0.7em 0;
+		}
+
+		button {
+			width: 10%;
+			border: none;
+			color: #fff;
+			background: #2A3038;
+			letter-spacing: -1px;
+			padding: 0.5em 0;
+			margin: 0;
+
+			@extend %f8;
+			@extend %f-regular;
+
+			&:focus,
+			&:active {
+				outline: 0;
+			}
+		}
+	}
+
+	.address__map {
+		margin: 10px 0;
+
+		#address-map {
+			width: 100%;
+			height: 300px;
+		}
+	}
+
+	.address__location {
+		input {
+			display: inline-block;
+			width: 49%;
+			color: #B1B1B1;
+		}
+	}
+}
+
+.form-area--tabs {
+	height: 480px;
+	display: none;
+	@include vendor(transition, transform opacity .3s ease);
+}
+
+.form-area--tabs.active {
+	display: block;
+	@include vendor(animation, move 0.2s 1 linear);
+}
+
+@-webkit-keyframes move {
+	from {
+		-webkit-transform: translate3d(100px,0,0);
+		opacity: 0;
+	}
+	to {
+		-webkit-transform: translate3d(0,0,0);
+		opacity: 1;
+	}
+}
+@-moz-keyframes move {
+	from {
+		-webkit-transform: translate3d(100px,0,0);
+		opacity: 0;
+	}
+	to {
+		-webkit-transform: translate3d(0,0,0);
+		opacity: 1;
+	}
+}
+@-o-keyframes move {
+	from {
+		-webkit-transform: translate3d(100px,0,0);
+		opacity: 0;
+	}
+	to {
+		-webkit-transform: translate3d(0,0,0);
+		opacity: 1;
 	}
 }

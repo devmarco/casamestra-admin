@@ -79,7 +79,6 @@
 
 		return {
 			restrict: 'A',
-			scope: true,
 			link: link,
 		};
 	}

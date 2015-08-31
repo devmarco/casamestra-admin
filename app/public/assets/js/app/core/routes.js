@@ -12,7 +12,13 @@
 	function route(routeConfigProvider) {
 		return {
 			set: function set(routeConfig) {
-				routeConfigProvider.config.when(routeConfig.url, routeConfig.config);
+				if (Array.isArray(routeConfig)) {
+					routeConfig.forEach(function each(value, index) {
+						routeConfigProvider.config.when(value.url, value.config);
+					});
+				} else {
+					routeConfigProvider.config.when(routeConfig.url, routeConfig.config);
+				}
 			},
 		};
 	}

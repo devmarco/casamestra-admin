@@ -6,54 +6,12 @@
 // SIZE
 
 @for $i from 1 through 100 {
-  %f#{$i} { 
+  %f#{$i} {
 	font-size: ($i/10)+em;
   };
 }
 
 // STYLES
-
-%f-heading-light {
-	font-family: 'Josefin Slab';
-  	font-style: normal;
-  	font-weight: 300;	
-}
-
-%f-heading-regular {
-	font-family: 'aileronregular';
-	font-weight: normal;
-	font-style: normal;
-}
-
-%f-heading-semibold {
-	font-family: 'Josefin Slab', serif;
-	font-style: normal;
-	font-weight: 600;
-}
-
-%f-heading-semibold-italic {
-	font-family: 'Josefin Slab', serif;
-	font-style: italic;
-	font-weight: 600;
-}
-
-%f-heading-regular {
-	font-family: 'Josefin Slab', serif;
-	font-style: normal;
-	font-weight: 400;
-}
-
-%f-heading-light-italic {
-	font-family: 'Josefin Slab';
-  	font-style: italic;
-  	font-weight: 300;	
-}
-
-%f-heading-bold {
-	font-family: 'Josefin Slab', serif;
-	font-style: normal;
-	font-weight: 700;
-}
 
 %f-regular {
 	font-family: 'Open Sans', sans-serif;

@@ -21,7 +21,6 @@
 	[TOOLS]
 \*------------------------------------*/
 
-@import 'tools/truncate';
 @import 'tools/mixins';
 
 /*------------------------------------*\
@@ -37,21 +36,18 @@
 	[OBJECTS]
 \*------------------------------------*/
 
-@import 'objects/buttons';
 @import 'objects/dropdown';
-@import 'objects/gallery';
+@import 'objects/buttons';
 
 /*------------------------------------*\
 	[COMPONENTS]
 \*------------------------------------*/
 
-@import 'components/widgets';
-@import 'components/breadcrumb';
 
 /*------------------------------------*\
 	[SECTIONS]
 \*------------------------------------*/
 
-@import 'sections/dashboard';
-@import 'sections/nav';
+@import 'sections/header';
+@import 'sections/section-header';
 @import 'sections/estates';

@@ -1,0 +1,36 @@
+header {
+	background-color: $master;
+	padding: 1em 0;
+}
+
+.nav {
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		@extend .clearfix;
+	}
+
+	li {
+		float: left;
+		margin-left: 15px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+
+	a {
+		display: block;
+		color: #fff;
+		text-decoration: none;
+		color: $master-light1;
+		@extend %f-regular;
+		@extend %f8;
+		@include vendor(transition, color 0.3s ease);
+
+		&:hover {
+			color: #fff;
+		}
+	}
+}

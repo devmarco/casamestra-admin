@@ -6,36 +6,57 @@
 		function link($scope, element, attrs) {
 			var map,
 				marker,
-				mapElement = document.getElementById('address-map'),
-				addressBtn = document.querySelector('.js-address-btn'),
-				latBtn = document.querySelector('.js-lat'),
-				lngBtn = document.querySelector('.js-lng');
+				mapElement = $window.$('#address-map'),
+				geocoder;
 
-			map = new google.maps.Map(mapElement, {
+			map = new google.maps.Map(mapElement[0], {
 				center: {lat: -34.397, lng: 150.644},
-				zoom: 8,
+				zoom: 15,
+				disableDefaultUI: true,
 			});
 
-			marker = new google.maps.Marker({
-				map: map,
-				draggable: true,
-				animation: google.maps.Animation.DROP,
-				position: {lat: 59.327, lng: 18.067},
-			});
+			geocoder = new google.maps.Geocoder();
 
-			marker.addListener('drag', function addListener(e) {
-				latBtn.value = e.latLng.G;
-				lngBtn.value = e.latLng.K;
-			});
+			$scope.location = {
+				lat: '',
+				lng: '',
+			};
+
+			function setCoords(lat, lng) {
+				$scope.location = {
+					lat: lat,
+					lng: lng
+				};
+
+				$scope.$apply();
+			}
 
 			$scope.setAddress = function set() {
-				console.log('Change');
+				var marker;
+
+				google.maps.event.trigger(map, 'resize');
+
+				geocoder.geocode( { 'address': $scope.address }, function address(results, status) {
+					if (status === google.maps.GeocoderStatus.OK) {
+						map.setCenter(results[0].geometry.location);
+						marker = new google.maps.Marker({
+							map: map,
+							draggable: true,
+							animation: google.maps.Animation.DROP,
+							position: results[0].geometry.location,
+						});
+						marker.addListener('drag', function addListener(e) {
+							setCoords(e.latLng.G, e.latLng.K);
+						});
+					} else {
+						// Message
+					}
+				});
 			};
 		}
 
 		return {
 			restrict: 'A',
-			scope: true,
 			link: link,
 		};
 	}

@@ -2,14 +2,21 @@
 	'use strict';
 
 	function config(route) {
-		route.set({
+		route.set([{
 			url: '/estates',
 			config: {
-				templateUrl: '/public/assets/js/app/estates/estates.html',
+				templateUrl: '/public/assets/js/app/estates/views/estates.html',
 				controller: 'Estates',
 				controllerAs: 'vm',
 			},
-		});
+		},{
+			url: '/estates/cadastro',
+			config: {
+				templateUrl: '/public/assets/js/app/estates/views/estates-form.html',
+				controller: 'EstatesInsert',
+				controllerAs: 'vm',
+			},
+		}]);
 	}
 
 	config.$inject = ['route'];

@@ -1,0 +1,96 @@
+.section__header {
+	background-color: $master;
+
+	.section__header__title {
+		padding: 2em 0;
+	}
+
+	.title {
+		margin: 0;
+		line-height: 48px;
+		color: #fff;
+		letter-spacing: 1px;
+		border: none;
+		background-color: transparent;
+		padding: 0;
+
+
+		@extend %f-light;
+		@extend %f25;
+		@extend .clearfix;
+	}
+
+	.logo {
+		float: left;
+		margin: 6px 20px 0 -76px;
+		padding-right: 20px;
+		border-right: 1px solid #424344;
+
+		img {
+			width: 35px;
+		}
+	}
+
+	.section__header__dropdown,
+	.section__header__page {
+		float: left;
+		margin-left: -2px;
+	}
+
+	.section__header__dropdown {
+		button {
+			@extend %font-config;
+			@extend .pe-7s-angle-down;
+			&:before {
+				float: right;
+				margin: 15px 0 0 15px;
+				@extend %f6;
+			}
+			&:focus,
+			&:active {
+				outline: 0;
+			}
+		}
+	}
+
+	.section__header__sublinks {
+		margin-left: -25px;
+		@extend .nav;
+
+		li {
+			margin-left: 35px;
+		}
+
+		a {
+			padding: 1em;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			border-bottom: 2px solid transparent;
+			@extend %f7;
+		}
+
+		a.active {
+			color: #fff;
+			border-color: $green;
+		}
+	}
+
+	.section__header__sublinks--steps {
+		a {
+			position: relative;
+			@extend %font-config;
+			@extend .pe-7s-angle-right;
+			&:before {
+				position: absolute;
+				right: -30px;
+				top: 10px;
+				font-size: 1.5em;
+			}
+		}
+		li:last-child {
+			a:before {
+				display: none;
+			}
+		}
+	}
+}
