@@ -15,29 +15,24 @@
 		<div class="section__header__sublinks section__header__sublinks--steps">
 			<div class="row">
 				<ul>
-					<li>
-						<a href="" class="active">Dados Iniciais</a>
-					</li>
-					<li>
-						<a href="">Endereço</a>
-					</li>
-					<li>
-						<a href="">Galeria de Imagens</a>
-					</li>
-					<li>
-						<a href="">Finalizar</a>
-					</li>
+					<li ng-class="{active: step === 1}">Dados Iniciais</li>
+					<li ng-class="{active: step === 2}">Endereço</li>
+					<li ng-class="{active: step === 3}">Galeria de Imagens</li>
+					<li ng-class="{active: step === 4}">Finalizar</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div cm-form-steps class="section__content">
 		<div class="row">
-			<div class="row form-area form-area--tabs active">
-				<div class="small-7 small-centered columns">
+			<div class="row form-area" ng-if="step === 1">
+				<div class="small-9 small-centered columns">
 					<div class="row">
 						<div class="small-12 columns">
-							<span class="form-group-title">Dados do Imóvel</span>
+							<div class="form-group-header">
+								<span class="title">Todo imóvel é único</span>
+								<span class="subtitle">Preencha o maximo de campos possível, quanto mais detalhes, maiores a chances de sucesso.</span>
+							</div>
 						</div>
 					</div>
 					<div class="row">
@@ -101,11 +96,6 @@
 										<label for="">Caracteristicas</label>
 										<select cm-select-multiple name="" id=""></select>
 									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="small-12 columns">
-									<span class="form-group-title">Detalhes chave</span>
 								</div>
 							</div>
 							<div class="row">
@@ -195,9 +185,104 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="form-action">
-								<button ng-click="back();" class="btn btn--grey" ng-if="!isFirst">Voltar</button>
-								<button ng-click="next();" class="btn btn--green" ng-class="{finish: finish}" ng-model="finish">Próximo</button>
+								<button ng-click="prev();" class="btn btn--grey">Voltar</button>
+								<button ng-click="next();" class="btn btn--master">Próximo</button>
 							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-area" ng-if="step === 2">
+				<div class="small-9 columns small-centered">
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="form-group-header">
+								<span class="title">Defina a localização do imóvel</span>
+								<span class="subtitle">O Endereçco é uma das informações mais importantes, pois é a melhor fonte de busca para os usuários</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div cm-address class="small-12 columns">
+							<div class="form-group">
+								<label for="">Endereço</label>
+								<div class="address__search">
+									<input type="text" placeholder="Procurar endereço" ng-model="address">
+									<button class="btn btn--master" ng-click="setAddress();">Buscar</button>
+								</div>
+								<div class="address__map">
+									<div id="address-map"></div>
+								</div>
+								<div class="address__location">
+									<input type="text" placeholder="Latitude" ng-model="location.lat" disabled>
+									<input type="text" placeholder="Longitude" ng-model="location.lng" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="form-action">
+								<button ng-click="prev();" class="btn btn--grey">Voltar</button>
+								<button ng-click="next();" class="btn btn--master" ng-class="{'btn-green': last}">Próximo</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-area" ng-if="step === 3">
+				<div class="small-9 columns small-centered">
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="form-group-header">
+								<span class="title">Selecione as melhor imagens</span>
+								<span class="subtitle">O Endereçco é uma das informações mais importantes, pois é a melhor fonte de busca para os usuários</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-12 columns">
+							<div cm-upload class="form-group">
+								<div class="gallery__button" ng-class="{loading: loading}" ng-hide="thumbnails">
+									<input name="photos" id="photos" type="file" multiple>
+								</div>
+								<div class="gallery__thumbs" ng-if="thumbnails">
+									<ul>
+										<li ng-repeat="img in thumbnails" ng-click="setCover($event);">
+											<span style="background-image: url({{ img.url }})"></span>
+											<input type="radio" value="$index" name="cover" ng-model="address.cover">
+											<div class="select__bx">
+												<span>Capa</span>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="form-action">
+								<button ng-click="prev();" class="btn btn--grey">Voltar</button>
+								<button ng-click="next();" class="btn btn--green">Cadastrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-area" ng-if="step === 4">
+				<div class="small-9 columns small-centered">
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="form-group-header">
+								<span class="title">Quase pronto</span>
+								<span class="subtitle">Estamos validando o seu cadastro</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-12 columns">
+
 						</div>
 					</div>
 				</div>

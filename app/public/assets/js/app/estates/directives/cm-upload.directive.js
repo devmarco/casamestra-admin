@@ -5,20 +5,15 @@
 
 		function link($scope, element, attrs) {
 			var inputFile = angular.element(document.querySelector('#photos')),
-				buttonBx = $(element).find('.gallery__button'),
-				loadingBx = buttonBx.find('.loader > span'),
-				galleryBx = $('.gallery__thumbs'),
-				galleryList = galleryBx.find('ul'),
-				fileData,
-				thumbs = [];
+				fileData;
 
 			// Hide thumbnails
-			$scope.inUpload = false;
 			$scope.loading = false;
 
 			inputFile.bind('change', function change() {
 				var fileReader,
 					images = inputFile[0].files,
+					thumbs = [],
 					i = 0;
 
 				$scope.loading = true;
@@ -47,9 +42,7 @@
 				$scope.$apply();
 
 				$timeout(function() {
-					$scope.inUpload = true;
 					$scope.loading = false;
-					$scope.select = true;
 					$scope.thumbnails = thumbs;
 				}, 1000);
 

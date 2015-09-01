@@ -138,6 +138,17 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+
+  @extend %font-config;
+  @extend .pe-7s-angle-down;
+
+  &:before {
+    position: absolute;
+    right: 0;
+    top: -6px;
+
+    @extend %f20;
+  }
 }
 
 .selectize-control.single .selectize-input .item {
@@ -155,7 +166,7 @@
 
 }
 .selectize-input.dropdown-active {
-
+    @extend .pe-7s-angle-up;
 }
 .selectize-control.multi .selectize-input > div {
   cursor: pointer;

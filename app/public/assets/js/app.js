@@ -5193,7 +5193,7 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 			function setCoords(lat, lng) {
 				$scope.location = {
 					lat: lat,
-					lng: lng
+					lng: lng,
 				};
 
 				$scope.$apply();
@@ -5234,6 +5234,41 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 	angular
 		.module('cm.widgets')
 		.directive('cmAddress', cmAddress);
+
+}());
+;(function count() {
+	'use strict';
+
+	function cmFormSteps($window) {
+
+		function link($scope, element, attrs) {
+			$scope.step = 1;
+
+			$scope.next = function next() {
+				if ($scope.step < 4) {
+					$scope.step = $scope.step + 1;
+				}
+			};
+
+			$scope.prev = function next() {
+
+				if ($scope.step > 1) {
+					$scope.step = $scope.step - 1;
+				}
+			};
+		}
+
+		return {
+			restrict: 'A',
+			link: link,
+		};
+	}
+
+	cmFormSteps.$inject = ['$window'];
+
+	angular
+		.module('cm.widgets')
+		.directive('cmFormSteps', cmFormSteps);
 
 }());
 ;(function count() {
@@ -5318,20 +5353,15 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 
 		function link($scope, element, attrs) {
 			var inputFile = angular.element(document.querySelector('#photos')),
-				buttonBx = $(element).find('.gallery__button'),
-				loadingBx = buttonBx.find('.loader > span'),
-				galleryBx = $('.gallery__thumbs'),
-				galleryList = galleryBx.find('ul'),
-				fileData,
-				thumbs = [];
+				fileData;
 
 			// Hide thumbnails
-			$scope.inUpload = false;
 			$scope.loading = false;
 
 			inputFile.bind('change', function change() {
 				var fileReader,
 					images = inputFile[0].files,
+					thumbs = [],
 					i = 0;
 
 				$scope.loading = true;
@@ -5360,9 +5390,7 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 				$scope.$apply();
 
 				$timeout(function() {
-					$scope.inUpload = true;
 					$scope.loading = false;
-					$scope.select = true;
 					$scope.thumbnails = thumbs;
 				}, 1000);
 

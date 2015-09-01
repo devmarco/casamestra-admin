@@ -25,7 +25,7 @@
 			function setCoords(lat, lng) {
 				$scope.location = {
 					lat: lat,
-					lng: lng
+					lng: lng,
 				};
 
 				$scope.$apply();

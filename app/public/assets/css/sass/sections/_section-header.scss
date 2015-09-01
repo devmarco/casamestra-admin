@@ -59,24 +59,22 @@
 
 		li {
 			margin-left: 35px;
-		}
-
-		a {
 			padding: 1em;
 			text-transform: uppercase;
 			letter-spacing: 1px;
 			border-bottom: 2px solid transparent;
+			color: $master-light1;
 			@extend %f7;
 		}
 
-		a.active {
+		li.active {
 			color: #fff;
 			border-color: $green;
 		}
 	}
 
 	.section__header__sublinks--steps {
-		a {
+		li {
 			position: relative;
 			@extend %font-config;
 			@extend .pe-7s-angle-right;
@@ -88,7 +86,7 @@
 			}
 		}
 		li:last-child {
-			a:before {
+			&:before {
 				display: none;
 			}
 		}
