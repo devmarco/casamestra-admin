@@ -36,7 +36,7 @@
 
 				google.maps.event.trigger(map, 'resize');
 
-				geocoder.geocode( { 'address': $scope.address }, function address(results, status) {
+				geocoder.geocode( { 'address': $scope.estates.address }, function address(results, status) {
 					if (status === google.maps.GeocoderStatus.OK) {
 						map.setCenter(results[0].geometry.location);
 						marker = new google.maps.Marker({

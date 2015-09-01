@@ -1,107 +1,9 @@
 .form-area {
+	position: relative;
+	padding-bottom: 60px;
 	@extend .clearfix;
 	@include vendor(transition, transform opacity .3s ease);
 	@include vendor(animation, move 0.2s 1 linear);
-	.form-group-header {
-		margin-bottom: 60px;
-
-		.title,
-		.subtitle {
-			display: block;
-		}
-
-		.title {
-			color: $master-light3;
-			margin: 0;
-			line-height: 40px;
-			margin-bottom: 10px;
-			@extend %f-regular;
-			@extend %f18;
-		}
-
-		.subtitle {
-			margin: 0;
-			color: #B3B3B3;
-			@extend %f-light;
-			@extend %f11;
-		}
-	}
-
-	.form-action {
-		text-align: right;
-		margin-top: 20px;
-
-		button, a {
-			display: inline-block;
-
-			&:first-child {
-				margin-right: 10px;
-			}
-		}
-
-		.back-btn {
-			background: #B9B9B9;
-		}
-
-		.next-btn {
-			background: $master;
-		}
-
-		.finish {
-			background: $green;
-		}
-	}
-
-	.form-group-title {
-		display: block;
-		margin-bottom: 25px;
-		letter-spacing: -1px;
-		color: $master-light1;
-
-		@extend %f-regular;
-		@extend %f10;
-	}
-
-	.form-group {
-		position: relative;
-		margin-bottom: 30px;
-		border-bottom: 1px solid #E4E4E4;
-		padding: 7px 0 4px;
-		@include vendor(transition, background-color border-color 0.5s ease-out);
-
-		label {
-			color: $master-light2;
-			display: block;
-			text-transform: uppercase;
-			margin-bottom: 10px;
-			@extend %f-bold;
-			@extend %f8;
-		}
-
-		input,
-		textarea {
-			border: none;
-			background-color: transparent;
-			display: block;
-			width: 100%;
-			color: $master;
-			margin-top: 5px;
-			height: auto;
-			min-height: auto;
-
-			&:focus,
-			&:active {
-				outline: 0;
-			}
-
-			@extend %f-regular;
-			@extend %f8;
-		}
-
-		&:hover {
-			border-color: $master-light1;
-		}
-	}
 
 	.address__search {
 		@extend .clearfix;
@@ -112,12 +14,14 @@
 		}
 		input {
 			width: 85%;
-    		padding: 1.1em 0;
+			padding: 0.6em 0;
 		}
 
 		button {
 			width: 15%;
-			padding: 1em 0;
+			padding: 0.7em 0.5em;
+			max-width: 15%;
+			min-width: auto;
 
 			&:focus,
 			&:active {
@@ -131,7 +35,7 @@
 
 		#address-map {
 			width: 100%;
-			height: 300px;
+			height: 275px;
 		}
 	}
 
@@ -158,7 +62,6 @@
 		@extend .pe-7s-cloud-download;
 
 		&:before {
-			margin-top: 85px;
 			display: block;
 			@extend %f50;
 		}
@@ -203,7 +106,7 @@
 			padding: 0;
 			margin: 0 5px 15px;
 			width: 23.8%;
-			height: 250px;
+			height: 170px;
 			border: 2px solid transparent;
 
 			@include vendor(box-shadow, 0 1px 2px rgba(43,59,93,.29));
@@ -246,18 +149,155 @@
 
 				span {
 					width: 100%;
-				    text-transform: uppercase;
-				    padding: 10px 0;
-				    height: auto;
-				    text-align: center;
-				    color: #fff;
-				    letter-spacing: 1px;
+					text-transform: uppercase;
+					padding: 10px 0;
+					height: auto;
+					text-align: center;
+					color: #fff;
+					letter-spacing: 1px;
 
 					@extend %f-bold;
 					@extend %f8;
 				}
 			}
 		}
+	}
+}
+
+.form-group-header {
+	margin-bottom: 60px;
+
+	.title,
+	.subtitle {
+		display: block;
+	}
+
+	.title {
+		color: $master-light3;
+		margin: 0;
+		line-height: 40px;
+		margin-bottom: 10px;
+		@extend %f-regular;
+		@extend %f18;
+	}
+
+	.subtitle {
+		margin: 0;
+		color: #B3B3B3;
+		@extend %f-light;
+		@extend %f11;
+	}
+}
+
+.form-group-sidebar {
+	.title,
+	.subtitle {
+		display: block;
+	}
+
+	.title {
+		color: $master-light3;
+		margin: 0;
+		line-height: 40px;
+		margin-bottom: 10px;
+		@extend %f-light;
+		@extend %f15;
+	}
+
+	.subtitle {
+		margin: 0;
+		color: #B3B3B3;
+		@extend %f-light;
+		@extend %f11;
+	}
+	.estate {
+		margin-top: 20px;
+	}
+}
+
+.form-content {
+	height: 460px;
+}
+
+.form-group-title {
+	display: block;
+	margin-bottom: 25px;
+	letter-spacing: -1px;
+	color: $master-light1;
+
+	@extend %f-regular;
+	@extend %f10;
+}
+
+
+.form-group {
+	position: relative;
+	margin-bottom: 30px;
+	border-bottom: 1px solid rgba(#b5bdce, 0.33);
+	padding: 7px 0 4px;
+	@include vendor(transition, background-color border-color 0.5s ease-out);
+
+	label {
+		color: #a2aabd;
+		display: block;
+		margin-bottom: 10px;
+		@extend %f-light;
+		@extend %f10;
+	}
+
+	input,
+	textarea {
+		border: none;
+		background-color: transparent;
+		display: block;
+		width: 100%;
+		color: $master;
+		margin-top: 5px;
+		height: auto;
+		min-height: auto;
+
+		&:focus,
+		&:active {
+			outline: 0;
+		}
+
+		@extend %f-regular;
+		@extend %f8;
+	}
+
+	&:hover {
+		border-color: $master-light1;
+	}
+}
+
+.form-action {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	padding: 1em;
+	text-align: right;
+	z-index: 9;
+	background: rgba(249, 249, 251, 0.67);
+
+	button, a {
+		display: inline-block;
+
+		&:first-child {
+			margin-right: 10px;
+		}
+	}
+
+	.back-btn {
+		background: #B9B9B9;
+	}
+
+	.next-btn {
+		background: $master;
+	}
+
+	.finish {
+		background: $green;
 	}
 }
 
@@ -294,25 +334,25 @@
 
 @-webkit-keyframes spin {
 	0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
 }
 @-moz-keyframes spin {
 	0% {
-        -moz-transform: rotate(0deg);
-    }
-    100% {
-        -moz-transform: rotate(360deg);
-    }
+		-moz-transform: rotate(0deg);
+	}
+	100% {
+		-moz-transform: rotate(360deg);
+	}
 }
 @-o-keyframes spin {
 	0% {
-        -o-transform: rotate(0deg);
-    }
-    100% {
-        -o-transform: rotate(360deg);
-    }
+		-o-transform: rotate(0deg);
+	}
+	100% {
+		-o-transform: rotate(360deg);
+	}
 }

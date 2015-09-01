@@ -4,7 +4,7 @@
 	border: 1px solid #2bb26e;
 	border-radius: 2px;
 	color: #fff;
-	padding: 15px 0 13px;
+	padding: 10px 0.5em 8px 0.5em;
 	outline: 0;
 	min-width: 120px;
 	letter-spacing: 1px;
@@ -31,4 +31,16 @@
 .btn--grey {
 	background-color: $master-light1;
 	border-color: darken($master-light1, 5%);
+}
+
+.btn--search {
+	line-height: 18px;
+
+	@extend %font-config;
+	@extend .pe-7s-search;
+
+	&:before {
+		float: right;
+		@extend %f15;
+	}
 }

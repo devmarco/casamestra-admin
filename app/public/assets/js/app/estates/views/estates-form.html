@@ -5,10 +5,18 @@
 				<div class="logo">
 					<img src="/public/assets/imgs/logo/casamestra-footer.svg" alt="">
 				</div>
-				<div class="section__header__dropdown">
+				<div class="section__header__dropdown active">
 					<button class="title">
 						Estates
 					</button>
+					<ul>
+						<li>
+							<a href="">Cadastrar</a>
+						</li>
+						<li>
+							<a href="">Alterar</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -24,24 +32,73 @@
 		</div>
 	</div>
 	<div cm-form-steps class="section__content">
-		<div class="row">
-			<div class="row form-area" ng-if="step === 1">
-				<div class="small-9 small-centered columns">
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="form-group-header">
-								<span class="title">Todo imóvel é único</span>
-								<span class="subtitle">Preencha o maximo de campos possível, quanto mais detalhes, maiores a chances de sucesso.</span>
-							</div>
-						</div>
+		<div class="row" ng-show="step === 1">
+			<div class="form-area">
+				<div class="small-12 columns">
+					<div class="form-group-header">
+						<span class="title">Vamos começar</span>
+						<span class="subtitle">Preencha o maximo de campos possível, quanto mais detalhes, maiores a chances de sucesso.</span>
 					</div>
+				</div>
+				<div class="small-7 columns">
 					<div class="row">
-						<div class="small-12 columns">
+						<div class="small-12 columns form-content">
+							<div class="row">
+								<div class="small-6 columns">
+									<div class="form-group">
+										<label for="">Cidade</label>
+										<select cm-select-single placeholder="Seleciona uma cidade" data-model="city">
+											<option value>Seleciona uma cidade</option>
+											<option value="1">Savassi</option>
+											<option value="2">Floresta</option>
+											<option value="3">Ouro Velho</option>
+										</select>
+									</div>
+								</div>
+								<div class="small-6 columns">
+									<div class="form-group">
+										<label for="">Vizinhança</label>
+										<select cm-select-single placeholder="Seleciona uma vizinhança" data-model="neighborhood">
+											<option value>Seleciona uma vizinhanç</option>
+											<option value="Savassi">Savassi</option>
+											<option value="Floresta">Floresta</option>
+											<option value="Ouro Velho">Ouro Velho</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-4 columns">
+									<div class="form-group">
+										<label for="">Tipo do Imóvel</label>
+										<select cm-select-single placeholder="Tipo do Imóvel" data-model="type">
+											<option value>Tipo do imóvel</option>
+											<option value="casa">Casa</option>
+											<option value="lote">Lote</option>
+											<option value="apartamento">apartamento</option>
+											<option value="loja">loja</option>
+										</select>
+									</div>
+								</div>
+								<div class="small-4 columns">
+									<div class="form-group">
+										<label for="">Area do Imóvel</label>
+										<input type="text" placeholder="1000m²" ng-model="estates.area">
+									</div>
+								</div>
+								<div class="small-4 columns">
+									<div class="form-group">
+										<label for="">Andares</label>
+										<input type="text" placeholder="Quantidade de andares do imóvel">
+									</div>
+								</div>
+							</div>
 							<div class="row">
 								<div class="small-4 columns">
 									<div class="form-group">
 										<label for="">Quartos</label>
-										<select cm-select-single name="" id="">
+										<select cm-select-single placeholder="Quartos" data-model="beds">
+											<option value>Quantidade de quartos</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -58,7 +115,8 @@
 								<div class="small-4 columns">
 									<div class="form-group">
 										<label for="">Banheiros</label>
-										<select cm-select-single name="" id="">
+										<select cm-select-single placeholder="Banheiros" data-model="bath">
+											<option value>Banheiros</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -75,7 +133,8 @@
 								<div class="small-4 columns">
 									<div class="form-group">
 										<label for="">Garagens</label>
-										<select cm-select-single name="" id="">
+										<select cm-select-single placeholder="Garagens" data-model="garages">
+											<option value>Quantidade de garagens</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -94,163 +153,186 @@
 								<div class="small-12 columns">
 									<div class="form-group">
 										<label for="">Caracteristicas</label>
-										<select cm-select-multiple name="" id=""></select>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="small-6 columns">
-									<div class="form-group">
-										<label for="">Cidade</label>
-										<select cm-select-single name="" id="">
-											<option value="1">Savassi</option>
-											<option value="2">Floresta</option>
-											<option value="3">Ouro Velho</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-										</select>
-									</div>
-								</div>
-								<div class="small-6 columns">
-									<div class="form-group">
-										<label for="">Vizinhança</label>
-										<select cm-select-single name="" id="">
-											<option value="1">Savassi</option>
-											<option value="2">Floresta</option>
-											<option value="3">Ouro Velho</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-										</select>
+										<select cm-select-multiple></select>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="small-4 columns">
 									<div class="form-group">
-										<label for="">Tipo do Imóvel</label>
-										<input type="text" placeholder="">
+										<label for="">Preço do Imóvel</label>
+										<input type="text" placeholder="R$" ng-model="estates.price">
 									</div>
 								</div>
-								<div class="small-4 columns">
-									<div class="form-group">
-										<label for="">Area do Imóvel</label>
-										<input type="text" placeholder="1000m2">
-									</div>
-								</div>
-								<div class="small-4 columns">
-									<div class="form-group">
-										<label for="">Andares</label>
-										<input type="text" placeholder="Quantidade de andares do imóvel">
-									</div>
-								</div>
-							</div>
-							<div class="row">
 								<div class="small-4 columns">
 									<div class="form-group">
 										<label for="">Valor do Condomínio</label>
-										<input type="text" placeholder="R$">
+										<input type="text" placeholder="R$" ng-model="estates.condominum">
 									</div>
 								</div>
 								<div class="small-4 columns">
 									<div class="form-group">
-										<label for="">Gatos?</label>
-										<select cm-select-single name="" id="">
-											<option value="1">Sim</option>
-											<option value="2">Não</option>
-										</select>
-									</div>
-								</div>
-								<div class="small-4 columns">
-									<div class="form-group">
-										<label for="">Cachorros?</label>
-										<select cm-select-single name="" id="">
-											<option value="1">Sim</option>
-											<option value="2">Não</option>
+										<label for="">Animais?</label>
+										<select cm-select-single placeholder="Animais são permitidos?" data-model="estates.animals">
+											<option value>Animais são permitidos?</option>
+											<option value="1">Cachorros</option>
+											<option value="2">Gatos</option>
+											<option value="3">Todos</option>
 										</select>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="form-action">
-								<button ng-click="prev();" class="btn btn--grey">Voltar</button>
-								<button ng-click="next();" class="btn btn--master">Próximo</button>
+				</div>
+				<div class="small-3 small-offset-2 columns">
+					<div class="form-group-sidebar">
+						<div class="title">Acompanhe como será mostrado o seu imóvel</div>
+						<div class="estate">
+							<div class="estate__image" style="background-image: url({{ config.coverPreview.url }})"></div>
+							<div class="estate__info">
+								<span class="neighborhood">{{ estates.neighborhood }}</span>
+								<span class="address">{{ estates.address }}</span>
+								<ul>
+									<li>
+										<span>Venda:</span>
+										<span>{{ estates.price | currency }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/square.svg" alt="" />
+										</span>
+										<span>{{ estates.area }} m²</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/bed.svg" alt="" />
+										</span>
+										<span>{{ estates.beds }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/bath.svg" alt="" />
+										</span>
+										<span>{{ estates.bath }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/park.svg" alt="" />
+										</span>
+										<span>{{ estates.garages }}</span>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row form-area" ng-if="step === 2">
-				<div class="small-9 columns small-centered">
+			<div class="form-action">
+				<button ng-click="prev();" class="btn btn--grey">Voltar</button>
+				<button ng-click="next();" class="btn btn--master">Próximo</button>
+			</div>
+		</div>
+		<div class="row" ng-show="step === 2">
+			<div class="form-area">
+				<div class="small-12 columns">
+					<div class="form-group-header">
+						<span class="title">Defina a localização do imóvel</span>
+						<span class="subtitle">O Endereçco é uma das informações mais importantes, pois é a melhor fonte de busca para os usuários</span>
+					</div>
+				</div>
+				<div class="small-7 columns">
 					<div class="row">
-						<div class="small-12 columns">
-							<div class="form-group-header">
-								<span class="title">Defina a localização do imóvel</span>
-								<span class="subtitle">O Endereçco é uma das informações mais importantes, pois é a melhor fonte de busca para os usuários</span>
+						<div cm-address class="small-12 columns form-content">
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="form-group">
+										<label for="">Endereço</label>
+										<div class="address__search">
+											<input type="text" placeholder="Procurar endereço" ng-model="estates.address">
+											<button class="btn btn--green btn--search" ng-click="setAddress();">Buscar</button>
+										</div>
+										<div class="address__map">
+											<div id="address-map"></div>
+										</div>
+										<div class="address__location">
+											<input type="text" placeholder="Latitude" ng-model="location.lat" disabled>
+											<input type="text" placeholder="Longitude" ng-model="location.lng" disabled>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div cm-address class="small-12 columns">
-							<div class="form-group">
-								<label for="">Endereço</label>
-								<div class="address__search">
-									<input type="text" placeholder="Procurar endereço" ng-model="address">
-									<button class="btn btn--master" ng-click="setAddress();">Buscar</button>
-								</div>
-								<div class="address__map">
-									<div id="address-map"></div>
-								</div>
-								<div class="address__location">
-									<input type="text" placeholder="Latitude" ng-model="location.lat" disabled>
-									<input type="text" placeholder="Longitude" ng-model="location.lng" disabled>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="form-action">
-								<button ng-click="prev();" class="btn btn--grey">Voltar</button>
-								<button ng-click="next();" class="btn btn--master" ng-class="{'btn-green': last}">Próximo</button>
+				</div>
+				<div class="small-3 small-offset-2 columns">
+					<div class="form-group-sidebar">
+						<div class="title">Acompanhe como será mostrado o seu imóvel</div>
+						<div class="estate">
+							<div class="estate__image" style="background-image: url({{ config.coverPreview.url }})"></div>
+							<div class="estate__info">
+								<span class="neighborhood">{{ estates.neighborhood }}</span>
+								<span class="address">{{ estates.address }}</span>
+								<ul>
+									<li>
+										<span>Venda:</span>
+										<span>{{ estates.price | currency }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/square.svg" alt="" />
+										</span>
+										<span>{{ estates.area }} m²</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/bed.svg" alt="" />
+										</span>
+										<span>{{ estates.beds }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/bath.svg" alt="" />
+										</span>
+										<span>{{ estates.bath }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/park.svg" alt="" />
+										</span>
+										<span>{{ estates.garages }}</span>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row form-area" ng-if="step === 3">
-				<div class="small-9 columns small-centered">
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="form-group-header">
-								<span class="title">Selecione as melhor imagens</span>
-								<span class="subtitle">O Endereçco é uma das informações mais importantes, pois é a melhor fonte de busca para os usuários</span>
-							</div>
-						</div>
+			<div class="form-action">
+				<button ng-click="prev();" class="btn btn--grey">Voltar</button>
+				<button ng-click="next();" class="btn btn--master" ng-class="{'btn-green': last}">Próximo</button>
+			</div>
+		</div>
+		<div class="row" ng-show="step === 3">
+			<div class="form-area" >
+				<div class="small-12 columns">
+					<div class="form-group-header">
+						<span class="title">Selecione as melhor imagens</span>
+						<span class="subtitle">O Endereçco é uma das informações mais importantes, pois é a melhor fonte de busca para os usuários</span>
 					</div>
+				</div>
+				<div class="small-7 columns">
 					<div class="row">
-						<div class="small-12 columns">
+						<div class="small-12 columns form-content">
 							<div cm-upload class="form-group">
-								<div class="gallery__button" ng-class="{loading: loading}" ng-hide="thumbnails">
+								<div class="gallery__button" ng-class="{loading: config.loading}" ng-hide="config.thumbnails">
 									<input name="photos" id="photos" type="file" multiple>
 								</div>
-								<div class="gallery__thumbs" ng-if="thumbnails">
+								<div class="gallery__thumbs" ng-if="config.thumbnails">
 									<ul>
-										<li ng-repeat="img in thumbnails" ng-click="setCover($event);">
+										<li ng-repeat="img in config.thumbnails" ng-click="setCover($event, cover);">
 											<span style="background-image: url({{ img.url }})"></span>
-											<input type="radio" value="$index" name="cover" ng-model="address.cover">
+											<input type="radio" value="{{ $index }}" name="cover" ng-model="cover">
 											<div class="select__bx">
 												<span>Capa</span>
 											</div>
@@ -260,17 +342,57 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="form-action">
-								<button ng-click="prev();" class="btn btn--grey">Voltar</button>
-								<button ng-click="next();" class="btn btn--green">Cadastrar</button>
+				</div>
+				<div class="small-3 small-offset-2 columns">
+					<div class="form-group-sidebar">
+						<div class="title">Veja como esse imóvel será mostrado</div>
+						<div class="estate">
+							<div class="estate__image" style="background-image: url({{ config.coverPreview.url }})"></div>
+							<div class="estate__info">
+								<span class="neighborhood">{{ estates.neighborhood }}</span>
+								<span class="address">{{ estates.address }}</span>
+								<ul>
+									<li>
+										<span>Venda:</span>
+										<span>{{ estates.price | currency }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/square.svg" alt="" />
+										</span>
+										<span>{{ estates.area }} m²</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/bed.svg" alt="" />
+										</span>
+										<span>{{ estates.beds }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/bath.svg" alt="" />
+										</span>
+										<span>{{ estates.bath }}</span>
+									</li>
+									<li>
+										<span class="icon">
+											<img src="/public/assets/imgs/sprites/svg/park.svg" alt="" />
+										</span>
+										<span>{{ estates.garages }}</span>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row form-area" ng-if="step === 4">
+			<div class="form-action">
+				<button ng-click="prev();" class="btn btn--grey">Voltar</button>
+				<button ng-click="next();" class="btn btn--green">Cadastrar</button>
+			</div>
+		</div>
+		<div class="row" ng-show="step === 4">
+			<div class="form-area" >
 				<div class="small-9 columns small-centered">
 					<div class="row">
 						<div class="small-12 columns">
@@ -290,262 +412,3 @@
 		</div>
 	</div>
 </section>
-
-<!-- <section cm-form-steps class="estates estates--form">
-	<header>
-		<div class="row">
-			<div class="small-6 columns">
-				<ul class="breadcrumb">
-					<li>
-						<a href="#">Imóveis ></a>
-					</li>
-					<li>
-						<a href="#" class="active">Novo Imóvel</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</header>
-	<div class="row form-area form-area--tabs active">
-		<div class="small-4 columns">
-			<div class="form-header">
-				<h1>Cadastrar um novo Imóvel é fácil</h1>
-				<h2>Preencha os campos com bastante atenção, e coloque o máximo de informação possível, quanto mais informações, mais fácil para encontra-lo</h2>
-			</div>
-		</div>
-		<div class="small-7 columns">
-			<div class="row">
-				<div class="small-12 columns">
-					<span class="form-group-title">Dados do Imóvel</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Quartos</label>
-						<select cm-select-single name="" id="">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</div>
-				</div>
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Banheiros</label>
-						<select cm-select-single name="" id="">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</div>
-				</div>
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Garagens</label>
-						<select cm-select-single name="" id="">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-12 columns">
-					<div class="form-group">
-						<label for="">Caracteristicas</label>
-						<select cm-select-multiple name="" id=""></select>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-12 columns">
-					<span class="form-group-title">Detalhes chave</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-6 columns">
-					<div class="form-group">
-						<label for="">Cidade</label>
-						<select cm-select-single name="" id="">
-							<option value="1">Savassi</option>
-							<option value="2">Floresta</option>
-							<option value="3">Ouro Velho</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</div>
-				</div>
-				<div class="small-6 columns">
-					<div class="form-group">
-						<label for="">Vizinhança</label>
-						<select cm-select-single name="" id="">
-							<option value="1">Savassi</option>
-							<option value="2">Floresta</option>
-							<option value="3">Ouro Velho</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Tipo do Imóvel</label>
-						<input type="text" placeholder="">
-					</div>
-				</div>
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Area do Imóvel</label>
-						<input type="text" placeholder="1000m2">
-					</div>
-				</div>
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Andares</label>
-						<input type="text" placeholder="Quantidade de andares do imóvel">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Valor do Condomínio</label>
-						<input type="text" placeholder="R$">
-					</div>
-				</div>
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Gatos?</label>
-						<select cm-select-single name="" id="">
-							<option value="1">Sim</option>
-							<option value="2">Não</option>
-						</select>
-					</div>
-				</div>
-				<div class="small-4 columns">
-					<div class="form-group">
-						<label for="">Cachorros?</label>
-						<select cm-select-single name="" id="">
-							<option value="1">Sim</option>
-							<option value="2">Não</option>
-						</select>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row form-area form-area--tabs">
-		<div class="small-4 columns">
-			<div class="form-header">
-				<h1>O Endereço do imóvel é um dado muito importante</h1>
-				<h2>Digite o endereço do imóvel, e após isso, certifique-se de posicionar o marcador exatamente no lugar do imóvel</h2>
-			</div>
-		</div>
-		<div class="small-7 columns">
-			<div class="row">
-				<div class="small-12 columns">
-					<span class="form-group-title">Endereço do Imóvel</span>
-				</div>
-			</div>
-			<div class="row">
-				<div cm-address class="small-12 columns">
-					<div class="form-group">
-						<label for="">Endereço</label>
-						<div class="address__search">
-							<input type="text" placeholder="Procurar endereço" ng-model="address">
-							<button ng-click="setAddress();">Buscar</button>
-						</div>
-						<div class="address__map">
-							<div id="address-map"></div>
-						</div>
-						<div class="address__location">
-							<input type="text" placeholder="Latitude" ng-model="location.lat">
-							<input type="text" placeholder="Longitude" ng-model="location.lng">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row form-area form-area--tabs">
-		<div class="small-4 columns">
-			<div class="form-header">
-				<h1>Geleria de Imagens</h1>
-				<h2>Preencha os campos com bastante atenção, e coloque o máximo de informação possível, quanto mais informações, mais fácil para encontra-lo</h2>
-			</div>
-		</div>
-		<div class="small-7 columns">
-			<div class="row">
-				<div class="small-12 columns">
-					<span class="form-group-title">Galeria de Fotos</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-12 columns">
-					<div class="form-group">
-						<label for="">Imagens</label>
-						<form method="POST" action="" cm-upload class="gallery-form">
-							<div class="gallery__button" ng-class="{active: loading && !select, inSelect: select}">
-								<input name="photos" id="photos" type="file" multiple>
-								<div class="loader">
-									<span></span>
-								</div>
-							</div>
-							<div class="gallery__thumbs" ng-if="inUpload">
-								<ul>
-									<li ng-repeat="img in thumbnails" ng-click="setCover($event);" class="js-thumb">
-										<input type="radio" value="$index" name="cover" ng-model="address.cover">
-										<span style="background-image: url({{ img.url }})"></span>
-									</li>
-								</ul>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-12 columns">
-			<div class="form-action">
-				<button ng-click="back();" class="back-btn" ng-if="!isFirst">Voltar</button>
-				<button ng-click="next();" class="next-btn" ng-class="{finish: finish}" ng-model="finish">{{ action }}</button>
-			</div>
-		</div>
-	</div>
-</section> -->

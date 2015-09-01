@@ -7,16 +7,13 @@
 			var inputFile = angular.element(document.querySelector('#photos')),
 				fileData;
 
-			// Hide thumbnails
-			$scope.loading = false;
-
 			inputFile.bind('change', function change() {
 				var fileReader,
 					images = inputFile[0].files,
 					thumbs = [],
 					i = 0;
 
-				$scope.loading = true;
+				$scope.config.loading = true;
 
 				fileData = new FormData();
 
@@ -42,16 +39,18 @@
 				$scope.$apply();
 
 				$timeout(function() {
-					$scope.loading = false;
-					$scope.thumbnails = thumbs;
+					$scope.config.galleryloading = false;
+					$scope.config.thumbnails = thumbs;
 				}, 1000);
 
 
 				// Select cover photos
-				$scope.setCover = function set(e) {
+				$scope.setCover = function set(e, cover) {
 					var thumb = $('.js-thumb');
 					thumb.removeClass('active');
 					$(e.target).parent().addClass('active');
+					$scope.estates.cover = cover;
+					$scope.config.coverPreview = $scope.config.thumbnails[cover];
 				};
 			});
 

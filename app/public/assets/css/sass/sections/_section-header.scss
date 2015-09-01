@@ -38,6 +38,7 @@
 	}
 
 	.section__header__dropdown {
+		position: relative;
 		button {
 			@extend %font-config;
 			@extend .pe-7s-angle-down;
@@ -50,6 +51,41 @@
 			&:active {
 				outline: 0;
 			}
+		}
+		ul {
+			position: absolute;
+			top: 0;
+			width: 250px;
+			list-style: none;
+			margin: 0;
+			padding: 2em;
+			display: none;
+			background: #fff;
+			z-index: 10;
+
+			@include vendor(box-shadow, 0 0 1px rgba(76,86,103,.25),0 2px 18px rgba(31,37,50,.32));
+
+			a {
+				display: block;
+				text-decoration: none;
+				color: #999;
+				padding: 0.5em 0;
+
+				@extend %f-light;
+				@extend %f10;
+
+				&:focus,
+				&:active {
+					outline: none;
+				}
+			}
+		}
+	}
+
+	.section__header__dropdown.active {
+		background-color: #fff;
+		ul {
+			display: block;
 		}
 	}
 

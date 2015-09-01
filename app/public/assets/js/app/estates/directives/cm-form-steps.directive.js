@@ -6,6 +6,11 @@
 		function link($scope, element, attrs) {
 			$scope.step = 1;
 
+			$scope.estates = {};
+			$scope.config = {
+				loading: false,
+			};
+
 			$scope.next = function next() {
 				if ($scope.step < 4) {
 					$scope.step = $scope.step + 1;

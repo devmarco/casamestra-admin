@@ -291,6 +291,116 @@ c){return e.$isEmpty(c)||c.length>=f}}}}};O.angular.bootstrap?console.log("WARNI
 SHORTDAY:"Sun Mon Tue Wed Thu Fri Sat".split(" "),SHORTMONTH:"Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" "),WEEKENDRANGE:[5,6],fullDate:"EEEE, MMMM d, y",longDate:"MMMM d, y",medium:"MMM d, y h:mm:ss a",mediumDate:"MMM d, y",mediumTime:"h:mm:ss a","short":"M/d/yy h:mm a",shortDate:"M/d/yy",shortTime:"h:mm a"},NUMBER_FORMATS:{CURRENCY_SYM:"$",DECIMAL_SEP:".",GROUP_SEP:",",PATTERNS:[{gSize:3,lgSize:3,maxFrac:3,minFrac:0,minInt:1,negPre:"-",negSuf:"",posPre:"",posSuf:""},{gSize:3,lgSize:3,
 maxFrac:2,minFrac:2,minInt:1,negPre:"-\u00a4",negSuf:"",posPre:"\u00a4",posSuf:""}]},id:"en-us",pluralCat:function(a,e){var f=a|0,g=e;t===g&&(g=Math.min(c(a),3));Math.pow(10,g);return 1==f&&0==g?"one":"other"}})}]),z(W).ready(function(){Zd(W,yc)}))})(window,document);!window.angular.$$csp().noInlineStyle&&window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 //# sourceMappingURL=angular.min.js.map
+;'use strict';
+angular.module("ngLocale", [], ["$provide", function($provide) {
+var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
+$provide.value("$locale", {
+  "DATETIME_FORMATS": {
+	"AMPMS": [
+	  "AM",
+	  "PM"
+	],
+	"DAY": [
+	  "domingo",
+	  "segunda-feira",
+	  "ter\u00e7a-feira",
+	  "quarta-feira",
+	  "quinta-feira",
+	  "sexta-feira",
+	  "s\u00e1bado"
+	],
+	"ERANAMES": [
+	  "Antes de Cristo",
+	  "Ano do Senhor"
+	],
+	"ERAS": [
+	  "a.C.",
+	  "d.C."
+	],
+	"FIRSTDAYOFWEEK": 6,
+	"MONTH": [
+	  "janeiro",
+	  "fevereiro",
+	  "mar\u00e7o",
+	  "abril",
+	  "maio",
+	  "junho",
+	  "julho",
+	  "agosto",
+	  "setembro",
+	  "outubro",
+	  "novembro",
+	  "dezembro"
+	],
+	"SHORTDAY": [
+	  "dom",
+	  "seg",
+	  "ter",
+	  "qua",
+	  "qui",
+	  "sex",
+	  "s\u00e1b"
+	],
+	"SHORTMONTH": [
+	  "jan",
+	  "fev",
+	  "mar",
+	  "abr",
+	  "mai",
+	  "jun",
+	  "jul",
+	  "ago",
+	  "set",
+	  "out",
+	  "nov",
+	  "dez"
+	],
+	"WEEKENDRANGE": [
+	  5,
+	  6
+	],
+	"fullDate": "EEEE, d 'de' MMMM 'de' y",
+	"longDate": "d 'de' MMMM 'de' y",
+	"medium": "d 'de' MMM 'de' y HH:mm:ss",
+	"mediumDate": "d 'de' MMM 'de' y",
+	"mediumTime": "HH:mm:ss",
+	"short": "dd/MM/yy HH:mm",
+	"shortDate": "dd/MM/yy",
+	"shortTime": "HH:mm"
+  },
+  "NUMBER_FORMATS": {
+	"CURRENCY_SYM": "R$",
+	"DECIMAL_SEP": ",",
+	"GROUP_SEP": ".",
+	"PATTERNS": [
+	  {
+		"gSize": 3,
+		"lgSize": 3,
+		"maxFrac": 3,
+		"minFrac": 0,
+		"minInt": 1,
+		"negPre": "-",
+		"negSuf": "",
+		"posPre": "",
+		"posSuf": ""
+	  },
+	  {
+		"gSize": 3,
+		"lgSize": 3,
+		"maxFrac": 2,
+		"minFrac": 2,
+		"minInt": 1,
+		"negPre": "-\u00a4",
+		"negSuf": "",
+		"posPre": "\u00a4",
+		"posSuf": ""
+	  }
+	]
+  },
+  "id": "pt-br",
+  "pluralCat": function(n, opt_precision) {  if (n >= 0 && n <= 2 && n != 2) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+});
+}]);
 ;/**
  * @license AngularJS v1.4.4
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -5058,7 +5168,9 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function module() {
 	'use strict';
 
-	angular.module('cm.estates', []);
+	angular.module('cm.estates', [
+		'ngLocale',
+	]);
 
 }());
 ;(function module() {
@@ -5204,7 +5316,7 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 
 				google.maps.event.trigger(map, 'resize');
 
-				geocoder.geocode( { 'address': $scope.address }, function address(results, status) {
+				geocoder.geocode( { 'address': $scope.estates.address }, function address(results, status) {
 					if (status === google.maps.GeocoderStatus.OK) {
 						map.setCenter(results[0].geometry.location);
 						marker = new google.maps.Marker({
@@ -5243,6 +5355,11 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 
 		function link($scope, element, attrs) {
 			$scope.step = 1;
+
+			$scope.estates = {};
+			$scope.config = {
+				loading: false,
+			};
 
 			$scope.next = function next() {
 				if ($scope.step < 4) {
@@ -5327,14 +5444,23 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 	function cmSelectSingle($window) {
 
 		function link($scope, element, attrs) {
+			var model = element[0].dataset.model;
+
+			function setModel(model, value) {
+				if (model) $scope.estates[model] = value;
+				$scope.$apply();
+			}
+
 			$(element[0]).selectize({
 				create: true,
+				onChange: function change(value) {
+					setModel(model, value);
+				},
 			});
 		}
 
 		return {
 			restrict: 'A',
-			scope: true,
 			link: link,
 		};
 	}
@@ -5355,16 +5481,13 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 			var inputFile = angular.element(document.querySelector('#photos')),
 				fileData;
 
-			// Hide thumbnails
-			$scope.loading = false;
-
 			inputFile.bind('change', function change() {
 				var fileReader,
 					images = inputFile[0].files,
 					thumbs = [],
 					i = 0;
 
-				$scope.loading = true;
+				$scope.config.loading = true;
 
 				fileData = new FormData();
 
@@ -5390,16 +5513,18 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 				$scope.$apply();
 
 				$timeout(function() {
-					$scope.loading = false;
-					$scope.thumbnails = thumbs;
+					$scope.config.galleryloading = false;
+					$scope.config.thumbnails = thumbs;
 				}, 1000);
 
 
 				// Select cover photos
-				$scope.setCover = function set(e) {
+				$scope.setCover = function set(e, cover) {
 					var thumb = $('.js-thumb');
 					thumb.removeClass('active');
 					$(e.target).parent().addClass('active');
+					$scope.estates.cover = cover;
+					$scope.config.coverPreview = $scope.config.thumbnails[cover];
 				};
 			});
 
