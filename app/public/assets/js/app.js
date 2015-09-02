@@ -5148,6 +5148,7 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 		'cm.dashboard',
 		'cm.estates',
 		'cm.widgets',
+		'cm.nav',
 	]);
 
 }());
@@ -5171,6 +5172,12 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 	angular.module('cm.estates', [
 		'ngLocale',
 	]);
+
+}());
+;(function module() {
+	'use strict';
+
+	angular.module('cm.nav', []);
 
 }());
 ;(function module() {
@@ -5239,12 +5246,19 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 		};
 	}
 
-	function route(routeConfigProvider) {
+	function route($rootScope, routeConfigProvider) {
+
+		$rootScope.sublinks = [];
+
 		return {
 			set: function set(routeConfig) {
 				if (Array.isArray(routeConfig)) {
 					routeConfig.forEach(function each(value, index) {
 						routeConfigProvider.config.when(value.url, value.config);
+
+						if (value.sublinks) {
+							$rootScope.sublinks.push(value.sublinks);
+						}
 					});
 				} else {
 					routeConfigProvider.config.when(routeConfig.url, routeConfig.config);
@@ -5254,7 +5268,7 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 	}
 
 	routeConfigProvider.$inject = ['$routeProvider'];
-	route.$inject = ['routeConfigProvider'];
+	route.$inject = ['$rootScope', 'routeConfigProvider'];
 
 	angular
 		.module('cm.core')
@@ -5295,6 +5309,21 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function controller() {
 	'use strict';
 
+	function ctrl(estate) {
+		var vm = this;
+		console.log(estate);
+		vm.estate = estate;
+	}
+
+	ctrl.$inject = ['estate'];
+
+	angular
+		.module('cm.estates')
+		.controller('EstatesEdit', ctrl);
+}());
+;(function controller() {
+	'use strict';
+
 	function ctrl() {
 
 	}
@@ -5306,9 +5335,12 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function controller() {
 	'use strict';
 
-	function ctrl() {
-
+	function ctrl(estates) {
+		var vm = this;
+		vm.estates = estates;
 	}
+
+	ctrl.$inject = ['estates'];
 
 	angular
 		.module('cm.estates')
@@ -5595,29 +5627,118 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function route() {
 	'use strict';
 
-	function config(route) {
-		route.set([{
-			url: '/estates',
-			config: {
-				templateUrl: '/public/assets/js/app/estates/views/estates.html',
-				controller: 'Estates',
-				controllerAs: 'vm',
-			},
-		},{
-			url: '/estates/cadastro',
-			config: {
-				templateUrl: '/public/assets/js/app/estates/views/estates-form.html',
-				controller: 'EstatesInsert',
-				controllerAs: 'vm',
-			},
-		}]);
+	function getAll(EstatesService) {
+		return EstatesService.get();
 	}
 
+	function getOne(EstatesService, $route) {
+		return EstatesService.one($route.current.params.id);
+	}
+
+	function config(route) {
+		route.set([
+			{
+				url: '/estates',
+				config: {
+					templateUrl: '/public/assets/js/app/estates/views/estates.html',
+					controller: 'Estates',
+					controllerAs: 'vm',
+					resolve: {
+						estates: getAll,
+					},
+				},
+				sublinks: {
+					title: 'Imóveis',
+					links: [
+						{url: '/estates', title: 'Visualizar Imóveis'},
+						{url: '/estates/cadastro', title: 'Novo Imóvel'},
+					],
+				},
+			},
+			{
+				url: '/estates/cadastro',
+				config: {
+					templateUrl: '/public/assets/js/app/estates/views/estates-form.html',
+					controller: 'EstatesInsert',
+					controllerAs: 'vm',
+				},
+			},
+			{
+				url: '/estates/edit/:id',
+				config: {
+					templateUrl: '/public/assets/js/app/estates/views/estates-edit.html',
+					controller: 'EstatesEdit',
+					controllerAs: 'vm',
+					resolve: {
+						estate: getOne,
+					},
+				},
+			},
+		]);
+	}
+
+	getAll.$inject = ['EstatesService'];
+	getOne.$inject = ['EstatesService', '$route'];
 	config.$inject = ['route'];
 
 	angular
 		.module('cm.estates')
 		.run(config);
+}());
+;(function controller() {
+	'use strict';
+
+	function EstatesService($http, $q) {
+		return {
+			get: function get() {
+				var defer = $q.defer();
+
+				$http.get('http://0.0.0.0:8081/estates')
+					.then(function success(result) {
+						defer.resolve(result.data);
+					}, function error(err) {
+						defer.reject(err);
+					});
+
+				return defer.promise;
+			},
+			one: function get(id) {
+				var defer = $q.defer();
+
+				$http.get('http://0.0.0.0:8081/estates/' + id)
+					.then(function success(result) {
+						defer.resolve(result.data);
+					}, function error(err) {
+						defer.reject(err);
+					});
+
+				return defer.promise;
+			},
+		};
+	}
+
+	EstatesService.$inject = ['$http', '$q'];
+
+	angular
+		.module('cm.estates')
+		.service('EstatesService', EstatesService);
+}());
+;(function controller() {
+	'use strict';
+
+	function ctrl($scope, $rootScope) {
+		var vm = this;
+
+		$rootScope.$on('$routeChangeSuccess', function(e, current) {
+			$scope.header = $rootScope.sublinks[0];
+		});
+	}
+
+	ctrl.$inject = ['$scope', '$rootScope'];
+
+	angular
+		.module('cm.nav')
+		.controller('Nav', ctrl);
 }());
 ;(function count() {
 	'use strict';

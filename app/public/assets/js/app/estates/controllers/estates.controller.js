@@ -1,9 +1,12 @@
 (function controller() {
 	'use strict';
 
-	function ctrl() {
-
+	function ctrl(estates) {
+		var vm = this;
+		vm.estates = estates;
 	}
+
+	ctrl.$inject = ['estates'];
 
 	angular
 		.module('cm.estates')

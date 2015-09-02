@@ -6,12 +6,12 @@
 			</div>
 			<div cm-dropdown class="section__header__dropdown">
 				<button class="title" ng-click="open($event);">
-					Novo Imóvel
+					Editar Imóvel
 				</button>
 				<div class="section__header__dropdown__area">
 					<ul>
 						<li>
-							<span>Novo Imóvel</span>
+							<a href="/estates/cadastro">Novo Imóvei</a>
 						</li>
 						<li>
 							<a href="/estates">Visualizar Imóveis</a>
@@ -38,8 +38,8 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="form-group-header">
-								<span class="title">Vamos começar</span>
-								<span class="subtitle">Preencha o maximo de campos possível, quanto mais detalhes, maiores a chances de sucesso.</span>
+								<span class="title">Editar um imóvel é simples</span>
+								<span class="subtitle">Basta alterar os campos abaixo com as novas informações que deseja.</span>
 							</div>
 						</div>
 						<div class="small-12 columns form-content">
@@ -51,7 +51,7 @@
 											<option value>Seleciona uma cidade</option>
 											<option value="1">Savassi</option>
 											<option value="2">Floresta</option>
-											<option value="3">Ouro Velho</option>
+											<option value="3" selected="selected">Ouro Velho</option>
 										</select>
 									</div>
 								</div>
@@ -83,13 +83,13 @@
 								<div class="small-4 columns">
 									<div class="form-group">
 										<label for="">Area do Imóvel</label>
-										<input type="text" placeholder="1000m²" ng-model="estates.area">
+										<input type="text" placeholder="1000m²" ng-model="vm.estate.keyDetails.area">
 									</div>
 								</div>
 								<div class="small-4 columns">
 									<div class="form-group">
 										<label for="">Andares</label>
-										<input type="text" placeholder="Quantidade de andares do imóvel">
+										<input type="text" placeholder="Quantidade de andares do imóvel" ng-model="vm.estate.keyDetails.buildingFloors">
 									</div>
 								</div>
 							</div>
@@ -161,13 +161,13 @@
 								<div class="small-4 columns">
 									<div class="form-group">
 										<label for="">Preço do Imóvel</label>
-										<input type="text" placeholder="R$" ng-model="estates.price">
+										<input type="text" placeholder="R$" ng-model="vm.estate.price">
 									</div>
 								</div>
 								<div class="small-4 columns">
 									<div class="form-group">
 										<label for="">Valor do Condomínio</label>
-										<input type="text" placeholder="R$" ng-model="estates.condominum">
+										<input type="text" placeholder="R$" ng-model="vm.estate.keyDetails.condominum">
 									</div>
 								</div>
 								<div class="small-4 columns">

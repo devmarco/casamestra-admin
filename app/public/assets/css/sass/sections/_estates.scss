@@ -1,3 +1,11 @@
 .section__content {
 	padding: 3em 0;
 }
+
+.estates__area {
+	@extend .row;
+
+	.estate {
+		margin-bottom: 20px;
+	}
+}

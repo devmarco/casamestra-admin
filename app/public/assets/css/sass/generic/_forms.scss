@@ -239,7 +239,7 @@
 	@include vendor(transition, background-color border-color 0.5s ease-out);
 
 	label {
-		color: #a2aabd;
+		color: $master;
 		display: block;
 		margin-bottom: 10px;
 		@extend %f-light;

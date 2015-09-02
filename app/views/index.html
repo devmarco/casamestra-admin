@@ -18,27 +18,47 @@
 </head>
 <body>
 	<div class="wrapper">
-		<header>
+		<header ng-controller="Nav as vm">
 			<div class="row">
 				<nav class="nav">
 					<ul>
 						<li>
-							<a href="">Dashboard</a>
+							<a href="/">Dashboard</a>
 						</li>
 						<li>
-							<a href="">Estates</a>
+							<a href="/estates">Estates</a>
 						</li>
 						<li>
-							<a href="">Neighborhoods</a>
+							<a href="/neighborhood">Neighborhoods</a>
 						</li>
 						<li>
-							<a href="">Agents</a>
+							<a href="/agents">Agents</a>
 						</li>
 						<li>
-							<a href="">Users</a>
+							<a href="/users">Users</a>
 						</li>
 					</ul>
 				</nav>
+				<div class="page__header">
+					<div class="row">
+						<div class="logo">
+							<img src="/public/assets/imgs/logo/casamestra-footer.svg" alt="">
+						</div>
+						<div cm-dropdown class="section__header__dropdown">
+							<button class="title" ng-click="open($event);">{{ header.title }}</button>
+							<div class="section__header__dropdown__area">
+								<ul>
+									<li>
+										<span>{{ header.title }}</span>
+									</li>
+									<li ng-repeat="links in header.links track by $index">
+										<a href="header.link.url">{{ header.link.title }}</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</header>
 		<main>

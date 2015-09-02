@@ -6,6 +6,7 @@
 		'cm.dashboard',
 		'cm.estates',
 		'cm.widgets',
+		'cm.nav',
 	]);
 
 }());
