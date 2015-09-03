@@ -3,7 +3,6 @@
 
 	function ctrl(estate) {
 		var vm = this;
-		console.log(estate);
 		vm.estate = estate;
 	}
 

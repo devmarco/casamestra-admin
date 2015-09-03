@@ -1,26 +1,4 @@
 <section cm-form-steps>
-	<div class="page__header">
-		<div class="row">
-			<div class="logo">
-				<img src="/public/assets/imgs/logo/casamestra-footer.svg" alt="">
-			</div>
-			<div cm-dropdown class="section__header__dropdown">
-				<button class="title" ng-click="open($event);">
-					Editar Imóvel
-				</button>
-				<div class="section__header__dropdown__area">
-					<ul>
-						<li>
-							<a href="/estates/cadastro">Novo Imóvei</a>
-						</li>
-						<li>
-							<a href="/estates">Visualizar Imóveis</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="page__header--sublinks page__header--sublinks--steps">
 		<div class="row">
 			<ul>
@@ -49,9 +27,8 @@
 										<label for="">Cidade</label>
 										<select cm-select-single placeholder="Seleciona uma cidade" data-model="city">
 											<option value>Seleciona uma cidade</option>
-											<option value="1">Savassi</option>
-											<option value="2">Floresta</option>
-											<option value="3" selected="selected">Ouro Velho</option>
+											<option value="Belo Horizonte">Belo Horizonte</option>
+											<option value="Nova Lima">Nova Lima</option>
 										</select>
 									</div>
 								</div>
@@ -73,10 +50,19 @@
 										<label for="">Tipo do Imóvel</label>
 										<select cm-select-single placeholder="Tipo do Imóvel" data-model="type">
 											<option value>Tipo do imóvel</option>
-											<option value="casa">Casa</option>
-											<option value="lote">Lote</option>
-											<option value="apartamento">apartamento</option>
-											<option value="loja">loja</option>
+											<option value="Andar Corrido">Andar Corrido</option>
+											<option value="Apart Hotel">Apart Hotel</option>
+											<option value="Apartamento">Apartamento</option>
+											<option value="Casa">Casa</option>
+											<option value="Casa em Condominio">Casa em Condominio</option>
+											<option value="Cobertura">Cobertura</option>
+											<option value="Galpão">Galpão</option>
+											<option value="Loja">Loja</option>
+											<option value="Lote">Lote</option>
+											<option value="Lote em Condominio">Lote em Condominio</option>
+											<option value="Predio">Predio</option>
+											<option value="Sala">Sala</option>
+											<option value="Vaga de Garagem">Vaga de Garagem</option>
 										</select>
 									</div>
 								</div>

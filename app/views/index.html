@@ -23,19 +23,19 @@
 				<nav class="nav">
 					<ul>
 						<li>
-							<a href="/">Dashboard</a>
+							<a href="/dashboard">Dashboard</a>
 						</li>
 						<li>
-							<a href="/estates">Estates</a>
+							<a href="/estates">Imóveis</a>
 						</li>
 						<li>
-							<a href="/neighborhood">Neighborhoods</a>
+							<a href="/neighborhood">Vizinhanças</a>
 						</li>
 						<li>
-							<a href="/agents">Agents</a>
+							<a href="/agents">Corretores</a>
 						</li>
 						<li>
-							<a href="/users">Users</a>
+							<a href="/users">Usuários</a>
 						</li>
 					</ul>
 				</nav>
@@ -52,7 +52,7 @@
 										<span>{{ header.title }}</span>
 									</li>
 									<li ng-repeat="links in header.links track by $index">
-										<a href="header.link.url">{{ header.link.title }}</a>
+										<a href="{{ links.url }}">{{ links.title }}</a>
 									</li>
 								</ul>
 							</div>

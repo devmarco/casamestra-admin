@@ -5222,6 +5222,32 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 		.directive('cmDropdown', cmDropdown);
 
 }());
+;(function count() {
+	'use strict';
+
+	function cmInputSearch() {
+
+		function link($scope, element, attrs) {
+			$scope.$watch('searchEstate', function(a, b) {
+				if (a) {
+					element.addClass('active');
+				} else {
+					element.removeClass('active');
+				}
+			});
+		}
+
+		return {
+			restrict: 'A',
+			link: link,
+		};
+	}
+
+	angular
+		.module('cm.widgets')
+		.directive('cmInputSearch', cmInputSearch);
+
+}());
 ;(function module() {
 	'use strict';
 
@@ -5255,14 +5281,11 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 				if (Array.isArray(routeConfig)) {
 					routeConfig.forEach(function each(value, index) {
 						routeConfigProvider.config.when(value.url, value.config);
-
-						if (value.sublinks) {
-							$rootScope.sublinks.push(value.sublinks);
-						}
 					});
 				} else {
 					routeConfigProvider.config.when(routeConfig.url, routeConfig.config);
 				}
+				routeConfigProvider.config.otherwise({redirectTo: '/dashboard'});
 			},
 		};
 	}
@@ -5278,9 +5301,23 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function controller() {
 	'use strict';
 
-	function ctrl() {
+	function ctrl($http) {
+		var query = '?callback=JSON_CALLBACK&query=Belo%20Horizonte';
+		
+		$http.post('https://api.twitter.com/oauth2/token', {
+			grant_type: 'client_credentials',
+		}).then(function(data) {
+			console.log(data);
+		});
 
+		// $http.jsonp('https://api.twitter.com/1.1/geo/search.json' + query).then(function then(data) {
+		// 	console.log(data);
+		// }, function error() {
+		// 	console.log('Error');
+		// });
 	}
+
+	ctrl.$inject = ['$http'];
 
 	angular
 		.module('cm.dashboard')
@@ -5291,11 +5328,14 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 
 	function config(route) {
 		route.set({
-			url: '/',
+			url: '/dashboard',
 			config: {
 				templateUrl: '/public/assets/js/app/dashboard/dashboard.html',
 				controller: 'Dashboard',
 				controllerAs: 'vm',
+				header: {
+					title: 'Dashboard',
+				}
 			},
 		});
 	}
@@ -5311,7 +5351,6 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 
 	function ctrl(estate) {
 		var vm = this;
-		console.log(estate);
 		vm.estate = estate;
 	}
 
@@ -5335,12 +5374,15 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function controller() {
 	'use strict';
 
-	function ctrl(estates) {
+	function ctrl(EstatesService) {
 		var vm = this;
-		vm.estates = estates;
+
+		EstatesService.get().then(function fetch(estates) {
+			vm.estates = estates;
+		});
 	}
 
-	ctrl.$inject = ['estates'];
+	ctrl.$inject = ['EstatesService'];
 
 	angular
 		.module('cm.estates')
@@ -5627,10 +5669,6 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 ;(function route() {
 	'use strict';
 
-	function getAll(EstatesService) {
-		return EstatesService.get();
-	}
-
 	function getOne(EstatesService, $route) {
 		return EstatesService.one($route.current.params.id);
 	}
@@ -5643,16 +5681,12 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 					templateUrl: '/public/assets/js/app/estates/views/estates.html',
 					controller: 'Estates',
 					controllerAs: 'vm',
-					resolve: {
-						estates: getAll,
+					header: {
+						title: 'Imóveis',
+						links: [
+							{url: '/estates/cadastro', title: 'Novo Imóvel'},
+						],
 					},
-				},
-				sublinks: {
-					title: 'Imóveis',
-					links: [
-						{url: '/estates', title: 'Visualizar Imóveis'},
-						{url: '/estates/cadastro', title: 'Novo Imóvel'},
-					],
 				},
 			},
 			{
@@ -5661,6 +5695,12 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 					templateUrl: '/public/assets/js/app/estates/views/estates-form.html',
 					controller: 'EstatesInsert',
 					controllerAs: 'vm',
+					header: {
+						title: 'Novo Imóvel',
+						links: [
+							{url: '/estates', title: 'Visualizar Imóvel'},
+						],
+					},
 				},
 			},
 			{
@@ -5672,12 +5712,18 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 					resolve: {
 						estate: getOne,
 					},
+					header: {
+						title: 'Alterar Imóvel',
+						links: [
+							{url: '/estates/cadastro', title: 'Novo Imóvel'},
+							{url: '/estates', title: 'Visualizar Imóvel'},
+						],
+					},
 				},
 			},
 		]);
 	}
 
-	getAll.$inject = ['EstatesService'];
 	getOne.$inject = ['EstatesService', '$route'];
 	config.$inject = ['route'];
 
@@ -5730,7 +5776,7 @@ t=null!=a.nsecs?a.nsecs:this._lastNSecs+1,w=k-this._lastMSecs+(t-this._lastNSecs
 		var vm = this;
 
 		$rootScope.$on('$routeChangeSuccess', function(e, current) {
-			$scope.header = $rootScope.sublinks[0];
+			$scope.header = current.$$route.header;
 		});
 	}
 

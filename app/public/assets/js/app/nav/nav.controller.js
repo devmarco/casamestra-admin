@@ -5,7 +5,7 @@
 		var vm = this;
 
 		$rootScope.$on('$routeChangeSuccess', function(e, current) {
-			$scope.header = $rootScope.sublinks[0];
+			$scope.header = current.$$route.header;
 		});
 	}
 

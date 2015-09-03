@@ -1,5 +1,6 @@
 header {
 	background-color: $master;
+	height: 163px;
 }
 
 .nav {
@@ -36,9 +37,8 @@ header {
 }
 
 .page__header {
-	padding: 1.5em 0 2em 0;
+	padding: 1.5em 0 2.5em 0;
 	background-color: $master;
-	@extend .clearfix;
 
 	.section__header__title {
 		padding: 2em 0;
@@ -55,13 +55,12 @@ header {
 
 
 		@extend %f-light;
-		@extend %f22;
-		@extend .clearfix;
+		@extend %f20;
 	}
 
 	.logo {
 		float: left;
-		margin: 6px 20px 0 -76px;
+		margin: 6px 20px 0 -62px;
 		padding-right: 20px;
 		border-right: 1px solid #424344;
 
@@ -102,16 +101,16 @@ header {
 			width: 300px;
 			background: #fff;
 			z-index: 10;
-			height: 0;
 			overflow: hidden;
 
 			@include vendor(box-shadow, 0 0 1px rgba(76,86,103,.25),0 2px 18px rgba(31,37,50,.32));
-			@include vendor(transition, height 0.2s ease);
+			@include vendor(transition, all 0.2s ease);
+			@include vendor(transform, scaleY(0));
 
 			ul {
 				list-style: none;
 				margin: 0;
-				padding: 2em;
+				padding: 1.5em 2em;
 				display: block;
 			}
 
@@ -147,7 +146,7 @@ header {
 		}
 
 		.section__header__dropdown__area {
-			height: 150px;
+			@include vendor(transform, scaleY(1));
 		}
 	}
 }
@@ -157,13 +156,13 @@ header {
 	background: $master;
 	padding: 0;
 	overflow: hidden;
-	margin: 0;
-	height: 0;
+	margin: -10px 0 0 0;
+	@include vendor(transform, scaleY(0));
 	@extend .nav;
-	@include vendor(animation, down 0.5s ease 1 forwards 0.5s);
+	@include vendor(animation, down 0.1s ease 1 forwards 0.2s);
 
 	ul {
-		margin-left: -9px;
+		margin-left: -7px;
 	}
 
 	li {
@@ -203,25 +202,25 @@ header {
 
 @-webkit-keyframes down {
 	0% {
-		height: 0px;
+		-webkit-transform: scaleY(0);
 	}
 	100% {
-		height: 40px;
+		-webkit-transform: scaleY(1);
 	}
 }
 @-moz-keyframes down {
 	0% {
-		height: 0px;
+		-moz-transform: scaleY(0);
 	}
 	100% {
-		height: 40px;
+		-moz-transform: scaleY(1);
 	}
 }
 @-o-keyframes down {
 	0% {
-		height: 0px;
+		-o-transform: scaleY(0);
 	}
 	100% {
-		height: 40px;
+		-o-transform: scaleY(1);
 	}
 }

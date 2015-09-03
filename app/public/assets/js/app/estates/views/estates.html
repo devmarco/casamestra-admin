@@ -1,8 +1,18 @@
 <section>
 	<div class="section__content">
 		<div class="estates__area">
+			<div class="section__button">
+				<a href="/estates/cadastro"></a>
+			</div>
 			<div class="row">
-				<div class="small-3 columns" ng-repeat="estate in vm.estates track by $index">
+				<div class="small-12 columns">
+					<div class="estates__area__search">
+						<input cm-input-search type="text" placeholder="Pesquisar por imóvel" ng-model="searchEstate">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-3 columns" ng-repeat="estate in vm.estates | filter:searchEstate track by $index">
 					<a href="/estates/edit/{{ estate.ecmid }}" class="estate">
 						<div class="estate__image" style="background-image: url({{ estate.images.cover }})"></div>
 						<div class="estate__info">

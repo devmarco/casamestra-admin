@@ -1,10 +1,6 @@
 (function route() {
 	'use strict';
 
-	function getAll(EstatesService) {
-		return EstatesService.get();
-	}
-
 	function getOne(EstatesService, $route) {
 		return EstatesService.one($route.current.params.id);
 	}
@@ -17,16 +13,12 @@
 					templateUrl: '/public/assets/js/app/estates/views/estates.html',
 					controller: 'Estates',
 					controllerAs: 'vm',
-					resolve: {
-						estates: getAll,
+					header: {
+						title: 'Imóveis',
+						links: [
+							{url: '/estates/cadastro', title: 'Novo Imóvel'},
+						],
 					},
-				},
-				sublinks: {
-					title: 'Imóveis',
-					links: [
-						{url: '/estates', title: 'Visualizar Imóveis'},
-						{url: '/estates/cadastro', title: 'Novo Imóvel'},
-					],
 				},
 			},
 			{
@@ -35,6 +27,12 @@
 					templateUrl: '/public/assets/js/app/estates/views/estates-form.html',
 					controller: 'EstatesInsert',
 					controllerAs: 'vm',
+					header: {
+						title: 'Novo Imóvel',
+						links: [
+							{url: '/estates', title: 'Visualizar Imóvel'},
+						],
+					},
 				},
 			},
 			{
@@ -46,12 +44,18 @@
 					resolve: {
 						estate: getOne,
 					},
+					header: {
+						title: 'Alterar Imóvel',
+						links: [
+							{url: '/estates/cadastro', title: 'Novo Imóvel'},
+							{url: '/estates', title: 'Visualizar Imóvel'},
+						],
+					},
 				},
 			},
 		]);
 	}
 
-	getAll.$inject = ['EstatesService'];
 	getOne.$inject = ['EstatesService', '$route'];
 	config.$inject = ['route'];
 

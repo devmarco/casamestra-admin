@@ -18,14 +18,11 @@
 				if (Array.isArray(routeConfig)) {
 					routeConfig.forEach(function each(value, index) {
 						routeConfigProvider.config.when(value.url, value.config);
-
-						if (value.sublinks) {
-							$rootScope.sublinks.push(value.sublinks);
-						}
 					});
 				} else {
 					routeConfigProvider.config.when(routeConfig.url, routeConfig.config);
 				}
+				routeConfigProvider.config.otherwise({redirectTo: '/dashboard'});
 			},
 		};
 	}

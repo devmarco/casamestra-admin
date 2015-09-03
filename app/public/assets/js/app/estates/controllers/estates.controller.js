@@ -1,12 +1,15 @@
 (function controller() {
 	'use strict';
 
-	function ctrl(estates) {
+	function ctrl(EstatesService) {
 		var vm = this;
-		vm.estates = estates;
+
+		EstatesService.get().then(function fetch(estates) {
+			vm.estates = estates;
+		});
 	}
 
-	ctrl.$inject = ['estates'];
+	ctrl.$inject = ['EstatesService'];
 
 	angular
 		.module('cm.estates')

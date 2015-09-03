@@ -3,11 +3,14 @@
 
 	function config(route) {
 		route.set({
-			url: '/',
+			url: '/dashboard',
 			config: {
 				templateUrl: '/public/assets/js/app/dashboard/dashboard.html',
 				controller: 'Dashboard',
 				controllerAs: 'vm',
+				header: {
+					title: 'Dashboard',
+				}
 			},
 		});
 	}
