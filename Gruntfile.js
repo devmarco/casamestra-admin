@@ -30,7 +30,7 @@ module.exports = function exports(grunt) {
 					style: 'compressed',
 				},
 				files: {
-					'app/public/assets/css/compiled/app.css': 'app/public/assets/css/sass/app.scss',
+					'app/client/assets/css/compiled/app.css': 'app/client/assets/css/sass/app.scss',
 				},
 			},
 		},
@@ -41,40 +41,12 @@ module.exports = function exports(grunt) {
 			},
 			dist: {
 				src: [
-					'app/public/assets/js/vendors/angular.min.js',
-					'app/public/assets/js/vendors/*.js',
-					'app/public/assets/js/app/*.module.js',
-					'app/public/assets/js/app/**/*.module.js',
-					'app/public/assets/js/app/**/*.js',
-					'app/public/assets/js/app/**/**/*.js',
+					'app/client/assets/js/vendors/jquery-2.1.4.min.js',
+					'app/client/assets/js/vendors/*.js',
+					'app/client/app/**/*.js',
+					'app/client/app/**/**/*.js',
 				],
-				dest: 'app/public/assets/js/app.js',
-			},
-		},
-
-		'svg-sprites': {
-			all: {
-				options: {
-					spriteElementPath: './app/public/assets/imgs/sprites/svg/',
-					name: 'icons',
-					spritePath: './app/public/assets/imgs/sprites/',
-					cssPath: './app/public/assets/css/sass/generic/',
-					prefix: 'sprite',
-					cssSuffix: 'scss',
-					cssPngPrefix: '.no-svg',
-					cssSvgPrefix: '.svg',
-				},
-			},
-		},
-
-		replace: {
-			example: {
-				src: './app/public/assets/css/sass/generic/sprite-all-sprite.scss',
-				overwrite: true,
-				replacements: [{
-					from: '../../../',
-					to: '../../../assets/',
-				}],
+				dest: 'app/client/assets/js/app.js',
 			},
 		},
 
@@ -91,29 +63,15 @@ module.exports = function exports(grunt) {
 					drop_console: true,
 				},
 				files: {
-					'app/public/assets/js/build/app.min.js': ['app/public/assets/js/app.js'],
-				},
-			},
-		},
-
-		browserify: {
-			dist: {
-				files: {
-					'app/public/assets/js/app.js': [
-						'app/public/assets/js/app/components/**/*.jsx',
-						'app/public/assets/js/app/pages/*.jsx',
-					],
-				},
-				options: {
-					transform: ['reactify'],
+					'app/client/assets/js/build/app.min.js': ['app/client/assets/js/app.js'],
 				},
 			},
 		},
 
 		watch: {
 			scripts: {
-				files: ['app/public/assets/css/sass/**/*.scss', 'app/public/assets/js/app/**/*.js'],
-				tasks: ['svg-sprites', 'replace', 'sass', 'concat', 'uglify'],
+				files: ['app/client/assets/css/sass/**/*.scss', 'app/client/app/**/*.js'],
+				tasks: ['sass', 'concat', 'uglify'],
 				options: {
 					spawn: false,
 				},
@@ -128,9 +86,6 @@ module.exports = function exports(grunt) {
 	grunt.loadNpmTasks('grunt-nodemon');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-dr-svg-sprites');
-	grunt.loadNpmTasks('grunt-text-replace');
-	grunt.loadNpmTasks('grunt-browserify');
 
 	// Default task(s).
 	grunt.registerTask('default', ['sass']);

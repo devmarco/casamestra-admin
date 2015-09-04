@@ -1,0 +1,41 @@
+<div class="row">
+	<nav class="nav">
+		<ul>
+			<li>
+				<a href="/dashboard">Dashboard</a>
+			</li>
+			<li>
+				<a href="/estates">Imóveis</a>
+			</li>
+			<li>
+				<a href="/neighborhood">Vizinhanças</a>
+			</li>
+			<li>
+				<a href="/agents">Corretores</a>
+			</li>
+			<li>
+				<a href="/users">Usuários</a>
+			</li>
+		</ul>
+	</nav>
+	<div class="page__header">
+		<div class="row">
+			<div class="logo">
+				<img src="/public/assets/imgs/logo/casamestra-footer.svg" alt="">
+			</div>
+			<div cm-dropdown class="section__header__dropdown">
+				<button class="title">{{ title }}</button>
+				<div class="section__header__dropdown__area">
+					<ul>
+						<li>
+							<span>{{ title }}</span>
+						</li>
+						<li ng-repeat="links in header.links track by $index">
+							<a href="{{ links.url }}">{{ links.title }}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
