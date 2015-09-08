@@ -4,7 +4,8 @@
 
 var routes = [
 	require('../routes/files'),
-	require('../routes/home'),
+	require('../routes/dashboard'),
+	require('../routes/estates'),
 ];
 
 module.exports = {

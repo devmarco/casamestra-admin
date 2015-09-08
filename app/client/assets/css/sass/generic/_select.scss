@@ -87,7 +87,6 @@
   width: 17px;
   text-align: center;
   font-weight: bold;
-  font-size: 12px;
   color: inherit;
   text-decoration: none;
   vertical-align: middle;
@@ -121,7 +120,6 @@
 .selectize-input input {
   color: #303030;
   font-family: inherit;
-  font-size: 13px;
   line-height: 18px;
   -webkit-font-smoothing: inherit;
 }
@@ -134,7 +132,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  z-index: 1;
+  z-index: 11;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -143,12 +141,16 @@
   @extend .pe-7s-angle-down;
 
   &:before {
-    position: absolute;
-    right: 0;
-    top: -6px;
+	position: absolute;
+	right: 0;
+	top: -6px;
 
-    @extend %f20;
+	@extend %f20;
   }
+}
+
+.selectize-input.input-active .item {
+	color: #ccc;
 }
 
 .selectize-control.single .selectize-input .item {
@@ -166,7 +168,7 @@
 
 }
 .selectize-input.dropdown-active {
-    @extend .pe-7s-angle-up;
+	@extend .pe-7s-angle-up;
 }
 .selectize-control.multi .selectize-input > div {
   cursor: pointer;
@@ -215,13 +217,21 @@
   z-index: 10;
   background: #ffffff;
   margin: -1px 0 0 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  left: 0 !important;
-  width: 100% !important;
-  top: 74px !important;
+  left: -20px !important;
+  width: 120% !important;
+  top: -20px !important;
+  padding: 60px 20px 20px 20px;
+
+  @include vendor(box-shadow, 0 0 1px rgba(76,86,103,.25),0 2px 18px rgba(31,37,50,.32));
 }
+
+.selectize-input.input-active {
+	.item {
+		position: relative;
+		z-index: 100;
+	}
+}
+
 .selectize-dropdown [data-selectable] {
   cursor: pointer;
   overflow: hidden;
@@ -234,7 +244,7 @@
 }
 .selectize-dropdown [data-selectable],
 .selectize-dropdown .optgroup-header {
-  padding: 5px 8px;
+  padding: 5px 0;
 }
 .selectize-dropdown .optgroup:first-child .optgroup-header {
   border-top: 0 none;

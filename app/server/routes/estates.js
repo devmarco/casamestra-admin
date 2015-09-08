@@ -1,13 +1,13 @@
 /* ------------------------------------ *\
-	[HOME]
+	[ESTATES]
 \* ------------------------------------ */
 
 homeView = {
 	method: 'GET',
-	path: '/dashboard',
+	path: '/estates',
 	handler: function handler(req, reply) {
-		reply.view('index', {
-			title: 'Dashboard',
+		reply.view('estates', {
+			title: 'Imóveis',
 		});
 	},
 };

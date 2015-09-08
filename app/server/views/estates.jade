@@ -1,0 +1,30 @@
+extends includes/base
+
+block content
+	include includes/header
+	main
+		section
+			.row
+				.small-12.columns
+					.estates-filter(data-module="estates.filter")
+						.estates-filter__search
+							input(type="text" placeholder="Pesquisar por imóvel")
+						.estates-filter__items
+							.select
+								select(placeholder="Tipo")
+									option
+									option(value="1") Casa
+									option(value="2") Apartamento
+							.select
+								select(placeholder="Estatus")
+									option
+									option(value="1") Vendido
+									option(value="2") Alugado
+							.select
+								select(placeholder="Venda / Aluguel")
+									option
+									option(value="1") Venda
+									option(value="2") Aluguel
+			.row
+				.small-12.columns
+					#estates.row.estates-content

@@ -1,0 +1,21 @@
+.select {
+	position: relative;
+
+	input, .item {
+		@extend %f9;
+	}
+
+	input {
+		@extend %f-regular;
+		color: $master;
+	}
+
+	.item {
+		@extend %f-regular;
+	}
+
+	.option {
+		@extend %f8;
+		@extend %f-regular;
+	}
+}

@@ -1,0 +1,26 @@
+header
+	.row
+		nav.nav
+			ul
+				li
+					a(href='/dashboard') Dashboard
+				li
+					a(href='/estates') Imóveis
+				li
+					a(href='/neighborhood') Vizinhanças
+				li
+					a(href='/agents') Corretores
+				li
+					a(href='/users') Usuários
+		.nav-header
+			.row
+				.nav-header__logo
+					img(src='/public/assets/imgs/logo/casamestra-footer.svg', alt='')
+				.nav-header__dropdown
+					button.title= title
+					.nav-header__dropdown__area
+						ul
+							li
+								span= title
+							li
+								a(href='{{ links.url }}') {{ links.title }}

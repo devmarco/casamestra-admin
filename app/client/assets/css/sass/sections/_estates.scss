@@ -1,50 +1,57 @@
-.section__content {
+section {
 	padding: 3em 0;
 }
 
-.estates__area {
-	position: relative;
-	@extend .row;
+// .estates-area {
+// 	position: relative;
+// 	@extend .row;
+//
+// 	.estate {
+// 		margin-bottom: 20px;
+// 	}
+//
+// 	.section__button {
+// 		position: absolute;
+// 		right: 0;
+// 		top: -5em;
+//
+// 		a {
+// 			display: block;
+// 			width: 60px;
+// 			height: 60px;
+// 			background-color: $green;
+// 			color: #fff;
+// 			text-align: center;
+// 			text-decoration: none;
+//
+// 			@include vendor(border-radius, 50%);
+// 			@extend %f20;
+// 			@extend %font-config;
+// 			@extend .pe-7s-plus;
+// 			@include vendor(box-shadow, 0 1px 5px rgba(0,0,0,.28));
+// 			@include vendor(transition, transform 0.2s ease);
+//
+// 			&:before {
+// 				margin-top: 14px;
+// 			}
+//
+// 			&:hover {
+// 				@include vendor(transform, scale(1.1));
+// 			}
+// 		}
+// 	}
+// }
 
-	.estate {
-		margin-bottom: 20px;
-	}
+.estates-filter {
+	margin-bottom: 40px;
 
-	.section__button {
-		position: absolute;
-		right: 0;
-		top: -5em;
-
-		a {
-			display: block;
-			width: 60px;
-			height: 60px;
-			background-color: $green;
-			color: #fff;
-			text-align: center;
-			text-decoration: none;
-
-			@include vendor(border-radius, 50%);
-			@extend %f20;
-			@extend %font-config;
-			@extend .pe-7s-plus;
-			@include vendor(box-shadow, 0 1px 5px rgba(0,0,0,.28));
-			@include vendor(transition, transform 0.2s ease);
-
-			&:before {
-				margin-top: 14px;
-			}
-
-			&:hover {
-				@include vendor(transform, scale(1.1));
-			}
-		}
-	}
+	@extend .clearfix;
 }
 
-.estates__area__search {
+.estates-filter__search {
 	position: relative;
-	margin-bottom: 40px;
+	width: 40%;
+	float: left;
 
 	@extend %font-config;
 	@extend .pe-7s-search;
@@ -57,12 +64,6 @@
 		@extend %f20;
 	}
 
-	&:after {
-		clear: both;
-		display: block;
-		content: '';
-	}
-
 	input {
 		border: none;
 		border-bottom: 1px solid #ccc;
@@ -70,27 +71,47 @@
 		display: block;
 		background-color: transparent;
 		color: $master;
-		width: 64px;
+		width: 50%;
 		float: left;
 		cursor: pointer;
 
-		@include vendor(transition, all 0.5s ease-out);
+		@include vendor(transition, all 0.7s ease-out);
 		@include opacity(0);
 		@extend %f-light;
 		@extend %f10;
 
-		&:hover,
 		&:active,
 		&:focus {
-			@include opacity(10);
-			width: 600px;
 			outline: 0;
+		}
+
+		&:hover {
+			width: 100%;
+			@include opacity(10);
 		}
 	}
 
 	.active {
 		@include opacity(10);
-		width: 600px;
-		outline: 0;
+	}
+}
+
+.estates-filter__items {
+	width: 50%;
+	float: right;
+	margin-top: 17px;
+
+	@extend .clearfix;
+
+	.select {
+		float: right;
+		width: 150px;
+		margin: 0 15px;
+	}
+}
+
+.estates-content {
+	.estate {
+		margin-bottom: 15px;
 	}
 }
