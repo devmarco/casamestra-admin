@@ -3694,14 +3694,15 @@ limitations under the License.
 
 	return {
 		init: function init(e) {
-			var select = $(context.element).find('.select');
-
-			if (select) {
-				select.find('select').selectize({
-					create: true,
-					sortField: 'text',
-				});
-			}
+			// var select = $(context.element).find('.select');
+			//
+			// if (select) {
+			// 	select.find('select').selectize({
+			// 		create: false,
+			// 		sortField: 'text',
+			// 		hideSelected: false,
+			// 	});
+			// }
 		},
 	};
 });
@@ -4071,19 +4072,55 @@ limitations under the License.
 		},
 	};
 });
-;Box.Application.addModule('estates.filter', function(context) {
+;Box.Application.addModule('estates.content', function(context) {
 	'use strict';
 
 	var _estates = context.getService('estates.service');
 	var _render = context.getService('render.service');
 
 	return {
-		behaviors: ['select'],
 		init: function init() {
 			_estates.get().then(function(data) {
 				_render.render(data);
 			});
 		},
+	};
+});
+;Box.Application.addModule('estates.filter', function(context) {
+	'use strict';
+
+	var _estates = context.getService('estates.service');
+	var _render = context.getService('render.service');
+	var _filter = context.getService('filter.service');
+	var estates;
+	var filteredEstates;
+
+	return {
+		behaviors: ['select'],
+		init: function() {
+			_estates.get().then(function(data) {
+				estates = data;
+			});
+		},
+		onkeyup: function key(e, element, elementType) {
+			var value = element.value.toLowerCase();
+			var estateObj;
+
+			if (value === '') {
+				_render.update(estates);
+			} else {
+				$(element).addClass('active');
+
+				filteredEstates = _filter.address(estates, value);
+
+				_render.update(filteredEstates);
+			}
+		},
+		onchange: function change(e, element, elementType) {
+			if (elementType === 'filter-buildingType') _render.update(_filter.buildingType(filteredEstates || estates, element.value));
+			if (elementType === 'filter-status') _render.update(_filter.status(filteredEstates || estates, element.value));
+			if (elementType === 'filter-action') _render.update(_filter.action(filteredEstates || estates, element.value));
+		}
 	};
 });
 ;Box.Application.addModule('header', function(context) {
@@ -4116,8 +4153,90 @@ limitations under the License.
 
 	return {
 		get: function get() {
-			return $.get('http://127.0.0.1:8081/estates');
+			var defer = $.Deferred();
+			var cache = window.sessionStorage.getItem('cmcachedata');
+
+			if (cache) {
+				defer.resolve(JSON.parse(cache));
+			} else {
+				$.get('http://127.0.0.1:8081/estates?limit=12').then(function then(data) {
+					defer.resolve(data);
+					window.sessionStorage.setItem('cmcachedata', JSON.stringify(data));
+
+				}, function error(err) {
+					defer.reject(err);
+				});
+			}
+
+			return defer.promise();
 		},
+	};
+});
+;Box.Application.addService('filter.service', function(application) {
+	'use strict';
+
+	var $ = application.getGlobal('jQuery');
+
+	return {
+		address: function filter(obj, query) {
+			var objects = [];
+
+			obj.forEach(function each(value, index) {
+				var address = value.address.toLowerCase();
+				var neighborhood = value.keyDetails.neighborhood.toLowerCase();
+
+				if (address.indexOf(query) !== -1 || neighborhood.indexOf(query) !== -1) {
+					objects.push(value);
+				}
+			});
+
+			return objects;
+		},
+		buildingType: function(obj, query) {
+			var objects = [];
+
+			if (query === 'all') {
+				return obj;
+			}
+
+			obj.forEach(function each(value, index) {
+				if (value.keyDetails.buildingType === query) {
+					objects.push(value);
+				}
+			});
+
+			return objects;
+		},
+		status: function(obj, query) {
+			var objects = [];
+
+			if (query === 'all') {
+				return obj;
+			}
+
+			obj.forEach(function each(value, index) {
+				if (value.status === query) {
+					objects.push(value);
+				}
+			});
+
+			return objects;
+		},
+		action: function(obj, query) {
+			var objects = [];
+
+			if (query === 'all') {
+				return obj;
+			}
+
+			obj.forEach(function each(value, index) {
+				if (value.action === query) {
+					objects.push(value);
+				}
+			});
+
+			return objects;
+		}
 	};
 });
 ;Box.Application.addService('render.service', function(application) {
@@ -4127,7 +4246,7 @@ limitations under the License.
 	var estatesTemplate;
 
 	estatesTemplate = '<repeat each="{{ estates }}" as="e">' +
-	'<div class="small-3 columns">' +
+	'<div easeIn="{{ fadeIn }}" class="estate-block small-3 columns">' +
 		'<a href="/estates/edit/{{ e.ecmid }}" class="estate">' +
 			'<div class="estate__image" style="background-image: url({{ e.images.cover }})"></div>' +
 			'<div class="estate__info">' +
@@ -4170,19 +4289,24 @@ limitations under the License.
 
 
 	return {
+		update: function(data) {
+			console.log(data);
+			this.view.set('estates', data);
+		},
 		render: function rndr(data) {
 			var template = pc.template(estatesTemplate);
-			var view;
 
-			console.log(data);
-
-			view = template.view({
+			this.view = template.view({
 				estates: data,
+				fadeIn: function (node) {
+					$(node).fadeIn(1000);
+				},
+				fadeOut: function (node, complete) {
+					$(node).fadeOut(1000);
+				}
 			});
 
-			console.log(view);
-
-			document.getElementById('estates').appendChild(view.render());
+			document.getElementById('estates').appendChild(this.view.render());
 		},
 	};
 });

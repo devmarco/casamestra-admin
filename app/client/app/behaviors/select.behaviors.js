@@ -5,14 +5,15 @@ Box.Application.addBehavior('select', function(context) {
 
 	return {
 		init: function init(e) {
-			var select = $(context.element).find('.select');
-
-			if (select) {
-				select.find('select').selectize({
-					create: true,
-					sortField: 'text',
-				});
-			}
+			// var select = $(context.element).find('.select');
+			//
+			// if (select) {
+			// 	select.find('select').selectize({
+			// 		create: false,
+			// 		sortField: 'text',
+			// 		hideSelected: false,
+			// 	});
+			// }
 		},
 	};
 });

@@ -92,21 +92,25 @@ section {
 	}
 
 	.active {
+		width: 100%;
 		@include opacity(10);
 	}
 }
 
 .estates-filter__items {
-	width: 50%;
+	width: 60%;
 	float: right;
-	margin-top: 17px;
+	margin-top: 10px;
 
 	@extend .clearfix;
 
 	.select {
 		float: right;
-		width: 150px;
-		margin: 0 15px;
+		margin-right: 80px;
+
+		&:first-child {
+			margin-right: 0;
+		}
 	}
 }
 

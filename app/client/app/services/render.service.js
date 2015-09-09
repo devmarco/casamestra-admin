@@ -5,7 +5,7 @@ Box.Application.addService('render.service', function(application) {
 	var estatesTemplate;
 
 	estatesTemplate = '<repeat each="{{ estates }}" as="e">' +
-	'<div class="small-3 columns">' +
+	'<div easeIn="{{ fadeIn }}" class="estate-block small-3 columns">' +
 		'<a href="/estates/edit/{{ e.ecmid }}" class="estate">' +
 			'<div class="estate__image" style="background-image: url({{ e.images.cover }})"></div>' +
 			'<div class="estate__info">' +
@@ -48,19 +48,24 @@ Box.Application.addService('render.service', function(application) {
 
 
 	return {
+		update: function(data) {
+			console.log(data);
+			this.view.set('estates', data);
+		},
 		render: function rndr(data) {
 			var template = pc.template(estatesTemplate);
-			var view;
 
-			console.log(data);
-
-			view = template.view({
+			this.view = template.view({
 				estates: data,
+				fadeIn: function (node) {
+					$(node).fadeIn(1000);
+				},
+				fadeOut: function (node, complete) {
+					$(node).fadeOut(1000);
+				}
 			});
 
-			console.log(view);
-
-			document.getElementById('estates').appendChild(view.render());
+			document.getElementById('estates').appendChild(this.view.render());
 		},
 	};
 });

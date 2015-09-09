@@ -7,24 +7,42 @@ block content
 			.row
 				.small-12.columns
 					.estates-filter(data-module="estates.filter")
+						.btn.btn--float
+							a(href="/estates/cadastro") +
 						.estates-filter__search
-							input(type="text" placeholder="Pesquisar por imóvel")
+							input(type="text" placeholder="Pesquisar por endereço ou vizinhança" data-type="filter-address")
 						.estates-filter__items
 							.select
-								select(placeholder="Tipo")
-									option
-									option(value="1") Casa
-									option(value="2") Apartamento
+								label Tipo do Imóvel
+								select(data-type="filter-buildingType")
+									option(value="Andar Corrido") Andar Corrido
+									option(value="Apart Hotel") Apart Hotel
+									option(value="Apartamento") Apartamento
+									option(value="Casa") Casa
+									option(value="Casa em Condominio") Casa em Condominio
+									option(value="Cobertura") Cobertura
+									option(value="Galpão") Galpão
+									option(value="Loja") Loja
+									option(value="Lote") Lote
+									option(value="Lote em Condominio") Lote em Condominio
+									option(value="Predio") Predio
+									option(value="Sala") Sala
+									option(value="Vaga de Garagem") Vaga de Garagem
+									option(value="all" selected) Todos
 							.select
-								select(placeholder="Estatus")
-									option
-									option(value="1") Vendido
-									option(value="2") Alugado
+								label Estatus do Imóvel
+								select(data-type="filter-status")
+									option(value="sold") Vendido
+									option(value="rented") Alugado
+									option(value="available") Disponível
+									option(value="negotiation") Em Negociação
+									option(value="all" selected) Todos
 							.select
-								select(placeholder="Venda / Aluguel")
-									option
-									option(value="1") Venda
-									option(value="2") Aluguel
+								label Ação do Imóvel	
+								select(data-type="filter-action")
+									option(value="sell") Venda
+									option(value="rent") Aluguel
+									option(value="all" selected) Todos
 			.row
 				.small-12.columns
-					#estates.row.estates-content
+					#estates.row.estates-content(data-module="estates.content")

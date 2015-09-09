@@ -130,7 +130,6 @@
 .selectize-input {
   display: block;
   width: 100%;
-  overflow: hidden;
   position: relative;
   z-index: 11;
   -webkit-box-sizing: border-box;
@@ -142,10 +141,10 @@
 
   &:before {
 	position: absolute;
-	right: 0;
-	top: -6px;
+	right: -25px;
+	top: -3px;
 
-	@extend %f20;
+	@extend %f15;
   }
 }
 
@@ -217,8 +216,8 @@
   z-index: 10;
   background: #ffffff;
   margin: -1px 0 0 0;
-  left: -20px !important;
-  width: 120% !important;
+  left: 0 !important;
+  width: 200px !important;
   top: -20px !important;
   padding: 60px 20px 20px 20px;
 
@@ -226,9 +225,15 @@
 }
 
 .selectize-input.input-active {
+	z-index: 21;
+
 	.item {
 		position: relative;
 		z-index: 100;
+	}
+
+	+ .selectize-dropdown {
+		z-index: 20;
 	}
 }
 

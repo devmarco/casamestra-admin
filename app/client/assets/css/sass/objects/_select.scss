@@ -1,21 +1,39 @@
 .select {
 	position: relative;
+	min-width: 150px;
 
-	input, .item {
-		@extend %f9;
-	}
+	label {
+		display: block;
+		color: $master-light1;
 
-	input {
 		@extend %f-regular;
-		color: $master;
-	}
-
-	.item {
-		@extend %f-regular;
-	}
-
-	.option {
 		@extend %f8;
-		@extend %f-regular;
+	}
+
+	select {
+		border: none;
+		background: transparent;
+		width: 100%;
+		padding: 0 40px 10px 0;
+		color: $master;
+		cursor: pointer;
+
+		@include vendor(appearance, none);
+
+		&:focus,
+		&:active {
+			outline: 0;
+		}
+	}
+
+	@extend %font-config;
+	@extend .pe-7s-angle-down;
+
+	&:before {
+		position: absolute;
+		right: 0;
+		top: 20px;
+
+		@extend %f15;
 	}
 }

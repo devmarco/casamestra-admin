@@ -1,3 +1,7 @@
+.estate-block {
+	display: none;
+}
+
 .estate {
 	display: block;
 	text-decoration: none;
@@ -11,7 +15,7 @@
 	&:focus {
 		outline: 0;
 	}
-	
+
 	&:hover {
 		border-color: $green;
 		@include vendor(box-shadow, 0 1px 2px rgba(43,59,93,.29),0 0 2px rgba(43,59,93,.29));
