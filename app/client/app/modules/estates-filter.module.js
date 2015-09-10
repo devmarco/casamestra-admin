@@ -8,7 +8,6 @@ Box.Application.addModule('estates.filter', function(context) {
 	var filteredEstates;
 
 	return {
-		behaviors: ['select'],
 		init: function() {
 			_estates.get().then(function(data) {
 				estates = data;

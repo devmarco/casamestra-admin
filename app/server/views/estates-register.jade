@@ -1,0 +1,191 @@
+extends includes/base
+
+block content
+	include includes/header
+	main
+		section
+			.nav-header__sublinks.nav-header__sublinks--steps
+				.row
+					ul
+						li Dados Iniciais
+						li Endereço
+						li Galeria de Imagens
+						li Finalizar
+			.section__content(data-module="estates.register")
+				div(data-step="1")
+					.form-area
+						.small-7.small-centered.columns
+							.row
+								.small-12.columns
+									.form-group-header
+										span.title Vamos começar
+										span.subtitle
+										| Preencha o maximo de campos possível, quanto mais detalhes, maiores a chances de sucesso.
+								.small-12.columns.form-content
+									.row
+										.small-6.columns
+											.form-group
+												label(for='') Cidade
+												.select.select--form
+													select(cm-select-single='', placeholder='Seleciona uma cidade', data-model='city')
+														option(value='') Seleciona uma cidade
+														option(value='1') Savassi
+														option(value='2') Floresta
+														option(value='3') Ouro Velho
+										.small-6.columns
+											.form-group
+												label(for='') Vizinhança
+												.select.select--form
+													select(cm-select-single='', data-model='neighborhood')
+														option(value='' selected disabled) Seleciona uma vizinhança
+														option(value='Savassi') Savassi
+														option(value='Floresta') Floresta
+														option(value='Ouro Velho') Ouro Velho
+									.row
+										.small-4.columns
+											.form-group
+												label(for='') Tipo do Imóvel
+												.select.select--form
+													select(cm-select-single='', placeholder='Tipo do Imóvel', data-model='type')
+														option(value='') Tipo do imóvel
+														option(value='casa') Casa
+														option(value='lote') Lote
+														option(value='apartamento') apartamento
+														option(value='loja') loja
+										.small-4.columns
+											.form-group
+												label(for='') Area do Imóvel
+												input(type='text', placeholder='1000m²', ng-model='estates.area')
+										.small-4.columns
+											.form-group
+												label(for='') Andares
+												input(type='text', placeholder='Quantidade de andares do imóvel')
+									.row
+										.small-4.columns
+											.form-group
+												label(for='') Quartos
+												.select.select--form
+													select(cm-select-single='', placeholder='Quartos', data-model='beds')
+														option(value='') Quantidade de quartos
+														option(value='1') 1
+														option(value='2') 2
+														option(value='3') 3
+														option(value='4') 4
+														option(value='5') 5
+														option(value='6') 6
+														option(value='7') 7
+														option(value='8') 8
+														option(value='9') 9
+														option(value='10') 10
+										.small-4.columns
+											.form-group
+												label(for='') Banheiros
+												.select.select--form
+													select(cm-select-single='', placeholder='Banheiros', data-model='bath')
+														option(value='') Banheiros
+														option(value='1') 1
+														option(value='2') 2
+														option(value='3') 3
+														option(value='4') 4
+														option(value='5') 5
+														option(value='6') 6
+														option(value='7') 7
+														option(value='8') 8
+														option(value='9') 9
+														option(value='10') 10
+										.small-4.columns
+											.form-group
+												label(for='') Garagens
+												.select.select--form
+													select(cm-select-single='', placeholder='Garagens', data-model='garages')
+														option(value='') Quantidade de garagens
+														option(value='1') 1
+														option(value='2') 2
+														option(value='3') 3
+														option(value='4') 4
+														option(value='5') 5
+														option(value='6') 6
+														option(value='7') 7
+														option(value='8') 8
+														option(value='9') 9
+														option(value='10') 10
+									.row
+										.small-12.columns
+											.form-group
+												label(for='') Caracteristicas
+												.select.select--multiple
+													select(multiple placeholder="Selecione uma característica")
+														option(value="") Selecione uma característica
+														option(value="Churrasqueira") Churrasqueira
+														option(value="Piscina") Piscina
+														option(value="Quadra") Quadra
+									.row
+										.small-4.columns
+											.form-group
+												label(for='') Preço do Imóvel
+												input(type='text', placeholder='R$', ng-model='estates.price')
+										.small-4.columns
+											.form-group
+												label(for='') Valor do Condomínio
+												input(type='text', placeholder='R$', ng-model='estates.condominum')
+										.small-4.columns
+											.form-group
+												label(for='') Animais?
+												.select.select--form
+													select(cm-select-single='', placeholder='Animais são permitidos?', data-model='estates.animals')
+														option(value='') Animais são permitidos?
+														option(value='dog') Cachorros
+														option(value='cat') Gatos
+														option(value='true') Sim
+														option(value='false') Não
+					.form-action
+						button.btn.btn--master(data-type="next") Próximo
+				div(data-step="2" style="display: none;")
+					.form-area(data-module="estates.maps")
+						.small-7.small-centered.columns
+							.row
+								.small-12.columns
+									.form-group-header
+										span.title Defina a localização do imóvel
+										span.subtitle
+										| O Endereçco é uma das informações mais importantes, pois é a melhor fonte de busca para os usuários
+								.small-12.columns.form-content
+									.row
+										.small-12.columns
+											.form-group
+												label(for='') Endereço
+												.address__search
+													input(type='text', placeholder='Procurar endereço', data-type='address')
+													button.btn.btn--green.btn--search(data-type="search") Buscar
+												.address__map
+													#address-map
+												.address__location
+													input(type='text', placeholder='Latitude', ng-model='location.lat', disabled='')
+													input(type='text', placeholder='Longitude', ng-model='location.lng', disabled='')
+					.form-action
+						button.btn.btn--grey(data-type="prev") Voltar
+						button.btn.btn--master(data-type="next") Próximo
+
+				div(data-step="3" style="display: none;")
+					.form-area
+						.small-7.small-centered.columns
+							.row
+								.small-12.columns
+									.form-group-header
+										span.title Selecione as melhores imagens
+										span.subtitle
+										| O Endereçco é uma das informações mais importantes, pois é a melhor fonte de busca para os usuários
+								.small-12.columns.form-content
+									.form-group(cm-upload='')
+										.gallery__button(ng-class='{loading: config.loading}', ng-hide='config.thumbnails')
+											input#photos(name='photos', type='file', multiple='')
+										.gallery__thumbs(ng-if='config.thumbnails')
+											ul
+												li
+													span(style='background-image: url({{ img.url }})')
+													input(type='radio', value='{{ $index }}', name='cover', ng-model='cover')
+													.select__bx
+														span Capa
+					.form-action
+						button.btn.btn--grey(data-type="prev") Voltar
+						button.btn.btn--master(data-type="next") Próximo

@@ -1,6 +1,8 @@
 html {
 	width: 100vw;
 	overflow-x: hidden;
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
 }
 
 body {

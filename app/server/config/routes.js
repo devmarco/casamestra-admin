@@ -6,6 +6,7 @@ var routes = [
 	require('../routes/files'),
 	require('../routes/dashboard'),
 	require('../routes/estates'),
+	require('../routes/estates-register'),
 ];
 
 module.exports = {

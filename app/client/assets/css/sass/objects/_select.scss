@@ -32,8 +32,15 @@
 	&:before {
 		position: absolute;
 		right: 0;
-		top: 20px;
+		top: -3px;
 
 		@extend %f15;
+	}
+}
+
+.select.select--form {
+	select {
+		padding: 0;
+		@extend %f9;
 	}
 }

@@ -3687,22 +3687,21 @@ limitations under the License.
 */
 !function(t){var e={};if(e.EventTarget=function(){"use strict";function t(){this._handlers={}}return t.prototype={constructor:t,on:function(t,e){var n,r,o=this._handlers[t];for("undefined"==typeof o&&(o=this._handlers[t]=[]),n=0,r=o.length;r>n;n++)if(o[n]===e)return;o.push(e)},fire:function(t,e){var n,r,o,i={type:t,data:e};if(n=this._handlers[i.type],n instanceof Array)for(n=n.concat(),r=0,o=n.length;o>r;r++)n[r].call(this,i)},off:function(t,e){var n,r,o=this._handlers[t];if(o instanceof Array)for(n=0,r=o.length;r>n;n++)if(o[n]===e){o.splice(n,1);break}}},t}(),e.JQueryDOM=function(){"use strict";return{type:"jquery",query:function(t,e){return $(t).find(e)[0]||null},queryAll:function(t,e){return $.makeArray($(t).find(e))},on:function(t,e,n){$(t).on(e,n)},off:function(t,e,n){$(t).off(e,n)}}}(),e.DOM=e.JQueryDOM,e.DOMEventDelegate=function(){"use strict";function t(t){return t&&t.hasAttribute("data-module")}function n(t){return t&&t.hasAttribute("data-type")}function r(e){for(var r=n(e);!r&&e&&!t(e);)e=e.parentNode,r=n(e);return r?e:null}function o(t,e,n){var r,o;for(r=0;r<a.length;r++)o=a[r],t["on"+o]&&e.call(n,o)}function i(t,e){this.element=t,this._handler=e,this._boundHandler={},this._attached=!1}var a=["click","mouseover","mouseout","mousedown","mouseup","mouseenter","mouseleave","keydown","keyup","submit","change","contextmenu","dblclick","input","focusin","focusout"];return i.prototype={constructor:i,_handleEvent:function(t){var e=r(t.target),n=e?e.getAttribute("data-type"):"";this._handler["on"+t.type](t,e,n)},attachEvents:function(){this._attached||(o(this._handler,function(t){function n(){r._handleEvent.apply(r,arguments)}var r=this;e.DOM.on(this.element,t,n),this._boundHandler[t]=n},this),this._attached=!0)},detachEvents:function(){o(this._handler,function(t){e.DOM.off(this.element,t,this._boundHandler[t])},this)}},i}(),e.Context=function(){"use strict";function t(t,e){this.application=t,this.element=e}return t.prototype={broadcast:function(t,e){this.application.broadcast(t,e)},getService:function(t){return this.application.getService(t)},getConfig:function(t){return this.application.getModuleConfig(this.element,t)},getGlobal:function(t){return this.application.getGlobal(t)},getGlobalConfig:function(t){return this.application.getGlobalConfig(t)},reportError:function(t){this.application.reportError(t)},getElement:function(){return this.element}},t}(),e.Application=function(){"use strict";function n(t,e){for(var n in e)e.hasOwnProperty(n)&&(t[n]=e[n]);return t}function r(t,e){return function(){return t.apply(e,arguments)}}function o(t,e){for(var n=0,r=t.length;r>n;n++)if(t[n]===e)return n;return-1}function i(){m={},b={},w={},E=[],x={},A={},_=!1;for(var t=0;t<D.length;t++)delete C[D[t]],delete e.Context.prototype[D[t]];D=[]}function a(t){for(var e=0,n=E.length;n>e;e++)if(E[e]===t)return!0;return!1}function u(t){if(m.debug)throw t;C.fire("error",{exception:t})}function s(t,e){var n,r;for(n in t)r=t[n],"function"==typeof r&&(t[n]=function(t,n){return function(){var r=e+"."+t+"() - ";try{return n.apply(this,arguments)}catch(o){o.methodName=t,o.objectName=e,o.name=r+o.name,o.message=r+o.message,u(o)}}}(n,r))}function c(t){var e=t.getAttribute("data-module");return e?e.split(" ")[0]:""}function f(t,e){"function"==typeof t[e]&&t[e].apply(t,Array.prototype.slice.call(arguments,2))}function l(t){var e=w[t];return e?a(t)?(u(new ReferenceError("Circular service dependency: "+E.join(" -> ")+" -> "+t)),null):(E.push(t),e.instance||(e.instance=e.creator(C)),E.pop(),e.instance):null}function h(t){var e,n,r,o,i=[];for(n=t.instance.behaviors||[],e=0;e<n.length;e++)"behaviorInstances"in t||(t.behaviorInstances={}),o=t.behaviorInstances,r=x[n[e]],r?(o[n[e]]||(o[n[e]]=r.creator(t.context)),i.push(o[n[e]])):u(new Error('Behavior "'+n[e]+'" not found'));return i}function d(t,n,r){var o=new e.DOMEventDelegate(n,r);t.push(o),o.attachEvents()}function p(t){var e=t.eventDelegates,n=h(t);d(e,t.element,t.instance);for(var r=0;r<n.length;r++)d(e,t.element,n[r])}function g(t){for(var e=t.eventDelegates,n=0;n<e.length;n++)e[n].detachEvents();t.eventDelegates=[]}function v(t){return A[t.id]}var y="[data-module]",m={},b={},E=[],w={},x={},A={},D=[],_=!1,C=new e.EventTarget;return n(C,{init:function(t){return n(m,t||{}),this.startAll(document.documentElement),this.fire("init"),_=!0,this},destroy:function(){return this.stopAll(document.documentElement),i(),this},isStarted:function(t){var e=v(t);return"object"==typeof e},start:function(t){var n,r,o,i=c(t),a=b[i];if(!a)return u(new Error('Module type "'+i+'" is not defined.')),this;if(!this.isStarted(t)){t.id||(t.id="mod-"+i+"-"+a.counter),a.counter++,r=new e.Context(this,t),o=a.creator(r),m.debug||s(o,i),n={moduleName:i,instance:o,context:r,element:t,eventDelegates:[]},p(n),A[t.id]=n,f(n.instance,"init");for(var l,d=h(n),g=0,v=d.length;v>g;g++)l=d[g],f(l,"init")}return this},stop:function(t){var e=v(t);if(e){g(e);for(var n,r=h(e),o=r.length-1;o>=0;o--)n=r[o],f(n,"destroy");f(e.instance,"destroy"),delete A[t.id]}else if(m.debug)return u(new Error("Unable to stop module associated with element: "+t.id)),this;return this},startAll:function(t){for(var n=e.DOM.queryAll(t,y),r=0,o=n.length;o>r;r++)this.start(n[r]);return this},stopAll:function(t){for(var n=e.DOM.queryAll(t,y),r=0,o=n.length;o>r;r++)this.stop(n[r]);return this},addModule:function(t,e){return"undefined"!=typeof b[t]?(u(new Error("Module "+t+" has already been added.")),this):(b[t]={creator:e,counter:1},this)},getModuleConfig:function(t,n){var r,o=v(t);return o?(o.config||(r=e.DOM.query(t,'script[type="text/x-config"]'),r&&(o.config=JSON.parse(r.text))),o.config?"undefined"==typeof n?o.config:n in o.config?o.config[n]:null:null):null},addService:function(t,n,r){if("undefined"!=typeof w[t])return u(new Error("Service "+t+" has already been added.")),this;if(r=r||{},w[t]={creator:n,instance:null},r.exports){var o,i=r.exports.length;for(o=0;i>o;o++){var a=r.exports[o],s=function(e){return function(){var n=l(t);return n[e].apply(n,arguments)}}(a);if(a in this)return u(new Error(a+" already exists on Application object")),this;if(this[a]=s,a in e.Context.prototype)return u(new Error(a+" already exists on Context prototype")),this;e.Context.prototype[a]=s,D.push(a)}}return this},getService:l,addBehavior:function(t,e){return"undefined"!=typeof x[t]?(u(new Error("Behavior "+t+" has already been added.")),this):(x[t]={creator:e,instance:null},this)},broadcast:function(t,e){var n,i,a,u,s,c;for(i in A)if(A.hasOwnProperty(i)){for(c=[],a=A[i],-1!==o(a.instance.messages||[],t)&&c.push(r(a.instance.onmessage,a.instance)),s=h(a),n=0;n<s.length;n++)u=s[n],-1!==o(u.messages||[],t)&&c.push(r(u.onmessage,u));for(n=0;n<c.length;n++)c[n](t,e)}return this.fire("message",{message:t,messageData:e}),this},getGlobal:function(e){return e in t?t[e]:null},getGlobalConfig:function(t){return"undefined"==typeof t?m:t in m?m[t]:null},setGlobalConfig:function(t){return _?(u(new Error("Cannot set global configuration after application initialization")),this):(n(m,t),this)},reportError:u})}(),"function"==typeof define&&define.amd)define("t3",[],function(){return e});else if("object"==typeof module&&"object"==typeof module.exports)module.exports=e;else{t.Box=t.Box||{};for(var n in e)e.hasOwnProperty(n)&&(t.Box[n]=e[n])}}("undefined"!=typeof window?window:this);
 //# sourceMappingURL=t3.min.js.map
-;Box.Application.addBehavior('select', function(context) {
+;Box.Application.addBehavior('select-multiple', function(context) {
 	'use strict';
 
 	var $ = context.getGlobal('jQuery');
 
 	return {
 		init: function init(e) {
-			// var select = $(context.element).find('.select');
-			//
-			// if (select) {
-			// 	select.find('select').selectize({
-			// 		create: false,
-			// 		sortField: 'text',
-			// 		hideSelected: false,
-			// 	});
-			// }
+			var select = $(context.element).find('.select--multiple');
+
+			if (select) {
+				select.find('select').selectize({
+					plugins: ['remove_button'],
+					maxItems: null,
+				});
+			}
 		},
 	};
 });
@@ -4096,7 +4095,6 @@ limitations under the License.
 	var filteredEstates;
 
 	return {
-		behaviors: ['select'],
 		init: function() {
 			_estates.get().then(function(data) {
 				estates = data;
@@ -4121,6 +4119,108 @@ limitations under the License.
 			if (elementType === 'filter-status') _render.update(_filter.status(filteredEstates || estates, element.value));
 			if (elementType === 'filter-action') _render.update(_filter.action(filteredEstates || estates, element.value));
 		}
+	};
+});
+;Box.Application.addModule('estates.maps', function(context) {
+	'use strict';
+
+	var $ = context.getGlobal('jQuery');
+	var google = context.getGlobal('google');
+	var step = 1;
+
+	return {
+		init: function init() {
+			var mapElement = $('#address-map');
+
+			this.map = new google.maps.Map(mapElement[0], {
+				center: {lat: -34.397, lng: 150.644},
+				zoom: 15,
+				disableDefaultUI: true,
+			});
+
+			this.geocoder = new google.maps.Geocoder();
+
+			// $scope.location = {
+			// 	lat: '',
+			// 	lng: '',
+			// };
+
+			function setCoords(lat, lng) {
+				// $scope.location = {
+				// 	lat: lat,
+				// 	lng: lng,
+				// };
+				//
+				// $scope.$apply();
+			}
+
+		},
+		onclick: function click(e, element, elementType) {
+			var _this = this;
+
+			function search() {
+				var marker;
+
+				google.maps.event.trigger(_this.map, 'resize');
+
+				_this.geocoder.geocode( { 'address': _this.address }, function address(results, status) {
+					if (status === google.maps.GeocoderStatus.OK) {
+						_this.map.setCenter(results[0].geometry.location);
+						marker = new google.maps.Marker({
+							map: _this.map,
+							draggable: true,
+							animation: google.maps.Animation.DROP,
+							position: results[0].geometry.location,
+						});
+						marker.addListener('drag', function addListener(e) {
+							//setCoords(e.latLng.G, e.latLng.K);
+						});
+					} else {
+						// Message
+					}
+				});
+			}
+
+			if (elementType === 'search') search();
+
+		},
+		onkeyup: function keyup(e, element, elementType) {
+			var _this = this;
+
+			function setAddress() {
+				_this.address = element.value;
+			}
+
+			if (elementType === 'address') setAddress();
+		},
+	};
+});
+;Box.Application.addModule('estates.register', function(context) {
+	'use strict';
+
+	var step = 1;
+
+	return {
+		behaviors: ['select-multiple'],
+		init: function init() {
+		},
+		onclick: function(e, element, elementType) {
+			function changeStep(n) {
+				$('[data-step]').hide();
+				$('[data-step=' + n + ']').show();
+			}
+
+			function next() {
+				if (step !== 3 ) changeStep(++step);
+			}
+
+			function prev() {
+				if (step !== 0 ) changeStep(--step);
+			}
+
+			if (elementType === 'next') next();
+			if (elementType === 'prev') prev();
+		},
 	};
 });
 ;Box.Application.addModule('header', function(context) {

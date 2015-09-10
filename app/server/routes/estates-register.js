@@ -1,17 +1,17 @@
 /* ------------------------------------ *\
-	[ESTATES]
+	[ESTATES NEW]
 \* ------------------------------------ */
 
 homeView = {
 	method: 'GET',
-	path: '/imoveis',
+	path: '/imoveis/novo',
 	handler: function handler(req, reply) {
-		reply.view('estates', {
-			title: 'Imóveis',
+		reply.view('estates-register', {
+			title: 'Novo Imóvel',
 			links: [
 				{
-					title: 'Novo Imóvel',
-					url: '/imoveis/novo',
+					title: 'Visualizar Imóveis',
+					url: '/imoveis',
 				},
 			],
 		});

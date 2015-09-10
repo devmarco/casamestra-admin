@@ -146,15 +146,13 @@ header {
 	}
 }
 
-.page__header--sublinks {
+.nav-header__sublinks {
 	width: 100%;
 	background: $master;
 	padding: 0;
 	overflow: hidden;
 	margin: -10px 0 0 0;
-	@include vendor(transform, scaleY(0));
 	@extend .nav;
-	@include vendor(animation, down 0.1s ease 1 forwards 0.2s);
 
 	ul {
 		margin-left: -7px;
@@ -176,7 +174,7 @@ header {
 	}
 }
 
-.page__header--sublinks--steps {
+.nav-header__sublinks--steps {
 	li {
 		position: relative;
 		@extend %font-config;
@@ -192,30 +190,5 @@ header {
 		&:before {
 			display: none;
 		}
-	}
-}
-
-@-webkit-keyframes down {
-	0% {
-		-webkit-transform: scaleY(0);
-	}
-	100% {
-		-webkit-transform: scaleY(1);
-	}
-}
-@-moz-keyframes down {
-	0% {
-		-moz-transform: scaleY(0);
-	}
-	100% {
-		-moz-transform: scaleY(1);
-	}
-}
-@-o-keyframes down {
-	0% {
-		-o-transform: scaleY(0);
-	}
-	100% {
-		-o-transform: scaleY(1);
 	}
 }
