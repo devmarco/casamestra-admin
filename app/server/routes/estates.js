@@ -4,10 +4,16 @@
 
 homeView = {
 	method: 'GET',
-	path: '/estates',
+	path: '/imoveis',
 	handler: function handler(req, reply) {
 		reply.view('estates', {
 			title: 'Imóveis',
+			links: [
+				{
+					title: 'Novo Imóvel',
+					url: '/imoveis/novo'
+				}
+			]
 		});
 	},
 };

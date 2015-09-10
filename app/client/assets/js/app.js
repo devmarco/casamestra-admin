@@ -4125,24 +4125,25 @@ limitations under the License.
 });
 ;Box.Application.addModule('header', function(context) {
 	'use strict';
-	// Globals
-	var paperclip = context.getGlobal('paperclip');
+
+	var $ = context.getGlobal('jQuery');
 
 	return {
 		init: function init() {
-			var t = '<h1>{{ title }}</h1>';
-			var template = paperclip.template(t);
-			var view;
+			$(document).on('click', function click(e) {
+				if (!$(e.target).closest('.nav-header__dropdown').length) {
+					$('.nav-header__dropdown').removeClass('active');
+				}
+		    });
 
-			view = template.view({
-				title: 'Marco',
+			$('.nav-header__dropdown__area').find('ul').on('click', function(e) {
+				e.stopPropagation();
 			});
+		},
+		onclick: function (e, element, elementType) {
+			$(element).parent().addClass('active');
 
-			view.render();
-
-			setTimeout(function() {
-				view.set('title', 'Marco99999');
-			}, 3000);
+			return false;
 		},
 	};
 });
@@ -4290,7 +4291,6 @@ limitations under the License.
 
 	return {
 		update: function(data) {
-			console.log(data);
 			this.view.set('estates', data);
 		},
 		render: function rndr(data) {

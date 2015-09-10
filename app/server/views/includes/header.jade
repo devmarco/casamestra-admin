@@ -1,4 +1,4 @@
-header
+header(data-module="header")
 	.row
 		nav.nav
 			ul
@@ -17,10 +17,11 @@ header
 				.nav-header__logo
 					img(src='/public/assets/imgs/logo/casamestra-footer.svg', alt='')
 				.nav-header__dropdown
-					button.title= title
+					button.title(data-type="dropdown-button")= title
 					.nav-header__dropdown__area
 						ul
 							li
 								span= title
-							li
-								a(href='{{ links.url }}') {{ links.title }}
+							each link in links
+								li
+									a(href='#{link.url}') #{link.title} 

@@ -8,6 +8,7 @@
 	outline: 0;
 	min-width: 120px;
 	letter-spacing: 1px;
+	overflow: hidden;
 
 	@extend %f8;
 	@extend %f-bold;
@@ -15,6 +16,29 @@
 	&:focus,
 	&:active {
 		outline: 0;
+	}
+
+	@include vendor(transform, translateZ(0));
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		border-radius: 100%;
+		background: rgba(#000, 0.1);
+		z-index: 1;
+
+		@include vendor(transition, transform 0.3s ease-out);
+		@include vendor(transform, scale(0));
+	}
+
+	&:hover {
+		&:before {
+			@include vendor(transform, scale(2));
+		}
 	}
 }
 
@@ -42,5 +66,29 @@
 	&:before {
 		float: right;
 		@extend %f15;
+	}
+}
+
+.btn--float {
+	position: absolute;
+    top: -85px;
+    right: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    padding: 0;
+    min-width: auto;
+
+	a {
+		position: relative;
+		z-index: 2;
+		color: #fff;
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		margin: -5px 0 0 4px;
+
+		@extend %f-light;
+		@extend %f40;
 	}
 }

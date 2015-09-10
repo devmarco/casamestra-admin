@@ -49,7 +49,6 @@ Box.Application.addService('render.service', function(application) {
 
 	return {
 		update: function(data) {
-			console.log(data);
 			this.view.set('estates', data);
 		},
 		render: function rndr(data) {
